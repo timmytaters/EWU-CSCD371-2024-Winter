@@ -1,4 +1,6 @@
-﻿namespace PrincessBrideTrivia;
+﻿//Timothy Nelson, CSCD 371, Assignment 1
+
+namespace PrincessBrideTrivia;
 
 public class Program
 {
