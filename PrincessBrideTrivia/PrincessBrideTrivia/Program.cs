@@ -1,30 +1,27 @@
 ﻿namespace PrincessBrideTrivia;
-
+//Timothy Nelson & Nathan Marsee, CSCD 371, Assignment 1
 public class Program
 {
     public static void Main(string[] args)
     {
         string filePath = GetFilePath();
         Question[] questions = LoadQuestions(filePath);
-
-        int numberCorrect = 0;
+        Console.WriteLine("Enter h for the answer for a hint with half credit");
+        double numberCorrect = 0.0;
         for (int i = 0; i < questions.Length; i++)
         {
-            bool result = AskQuestion(questions[i]);
-            if (result)
-            {
-                numberCorrect++;
-            }
+            double result = AskQuestion(questions[i]);
+            numberCorrect += result;
         }
         Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
     }
 
-    public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
+    public static string GetPercentCorrect(double numberCorrectAnswers, int numberOfQuestions)
     {
-        return ((double)numberCorrectAnswers / numberOfQuestions * 100) + "%";
+        return Math.Round((numberCorrectAnswers / numberOfQuestions * 100),2) + "%";
     }
 
-    public static bool AskQuestion(Question question)
+    public static double AskQuestion(Question question)
     {
         DisplayQuestion(question);
 
@@ -37,16 +34,26 @@ public class Program
         return Console.ReadLine();
     }
 
-    public static bool DisplayResult(string userGuess, Question question)
+    public static double DisplayResult(string userGuess, Question question)
     {
-        if (userGuess == question.CorrectAnswerIndex)
+        if(userGuess == "h")
+        {
+            Console.WriteLine(question.Hint);
+            userGuess = Console.ReadLine();
+            if (userGuess == question.CorrectAnswerIndex)
+            {
+                Console.WriteLine("Correct");
+                return 0.5;
+            }
+        }
+        else if (userGuess == question.CorrectAnswerIndex)
         {
             Console.WriteLine("Correct");
-            return true;
+            return 1.0;
         }
 
         Console.WriteLine("Incorrect");
-        return false;
+        return 0.0;
     }
 
     public static void DisplayQuestion(Question question)
@@ -67,10 +74,10 @@ public class Program
     {
         string[] lines = File.ReadAllLines(filePath);
 
-        Question[] questions = new Question[lines.Length / 5];
+        Question[] questions = new Question[lines.Length / 6];
         for (int i = 0; i < questions.Length; i++)
         {
-            int lineIndex = i * 5;
+            int lineIndex = i * 6;
             string questionText = lines[lineIndex];
 
             string answer1 = lines[lineIndex + 1];
@@ -78,6 +85,7 @@ public class Program
             string answer3 = lines[lineIndex + 3];
 
             string correctAnswerIndex = lines[lineIndex + 4];
+            string hint = lines[lineIndex + 5];
 
             Question question = new();
             question.Text = questionText;
@@ -86,6 +94,7 @@ public class Program
             question.Answers[1] = answer2;
             question.Answers[2] = answer3;
             question.CorrectAnswerIndex = correctAnswerIndex;
+            question.Hint = hint;
             questions[i] = question;
         }
         return questions;
