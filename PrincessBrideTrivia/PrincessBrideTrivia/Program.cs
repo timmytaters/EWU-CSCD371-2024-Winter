@@ -3,6 +3,7 @@
 public class Program
 {
     public static int hints = 0;
+    public static string hintFilePath = "Hints.txt";
     public static void Main(string[] args)
     {
         string filePath = GetFilePath();
@@ -17,6 +18,7 @@ public class Program
                 numberCorrect++;
             }
         }
+        numberCorrect -= 0.5 * hints;
         Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
     }
 
@@ -40,7 +42,7 @@ public class Program
 
     public static bool DisplayResult(string userGuess, Question question)
     {
-        /*if(userGuess == "h")
+        if(userGuess == "h")
         {
             Console.WriteLine(question.Hint);
             userGuess = Console.ReadLine();
@@ -51,7 +53,7 @@ public class Program
                 return true;
             }
         }
-        else */if (userGuess == question.CorrectAnswerIndex)
+        else if (userGuess == question.CorrectAnswerIndex)
         {
             Console.WriteLine("Correct");
             return true;
@@ -78,11 +80,12 @@ public class Program
     public static Question[] LoadQuestions(string filePath)
     {
         string[] lines = File.ReadAllLines(filePath);
+        string[] hints = File.ReadAllLines(hintFilePath);
 
-        Question[] questions = new Question[lines.Length / 6];
+        Question[] questions = new Question[lines.Length / 5];
         for (int i = 0; i < questions.Length; i++)
         {
-            int lineIndex = i * 6;
+            int lineIndex = i * 5;
             string questionText = lines[lineIndex];
 
             string answer1 = lines[lineIndex + 1];
@@ -90,7 +93,6 @@ public class Program
             string answer3 = lines[lineIndex + 3];
 
             string correctAnswerIndex = lines[lineIndex + 4];
-            string hint = lines[lineIndex + 5];
 
             Question question = new();
             question.Text = questionText;
@@ -99,7 +101,7 @@ public class Program
             question.Answers[1] = answer2;
             question.Answers[2] = answer3;
             question.CorrectAnswerIndex = correctAnswerIndex;
-            question.Hint = hint;
+            question.Hint = hints[i];
             questions[i] = question;
         }
         return questions;
