@@ -2,6 +2,7 @@
 //Timothy Nelson & Nathan Marsee, CSCD 371, Assignment 1
 public class Program
 {
+    public static int hints = 0;
     public static void Main(string[] args)
     {
         string filePath = GetFilePath();
@@ -10,8 +11,11 @@ public class Program
         double numberCorrect = 0.0;
         for (int i = 0; i < questions.Length; i++)
         {
-            double result = AskQuestion(questions[i]);
-            numberCorrect += result;
+            bool result = AskQuestion(questions[i]);
+            if(result) 
+            {
+                numberCorrect++;
+            }
         }
         Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
     }
@@ -21,7 +25,7 @@ public class Program
         return Math.Round((numberCorrectAnswers / numberOfQuestions * 100),2) + "%";
     }
 
-    public static double AskQuestion(Question question)
+    public static bool AskQuestion(Question question)
     {
         DisplayQuestion(question);
 
@@ -34,26 +38,27 @@ public class Program
         return Console.ReadLine();
     }
 
-    public static double DisplayResult(string userGuess, Question question)
+    public static bool DisplayResult(string userGuess, Question question)
     {
-        if(userGuess == "h")
+        /*if(userGuess == "h")
         {
             Console.WriteLine(question.Hint);
             userGuess = Console.ReadLine();
             if (userGuess == question.CorrectAnswerIndex)
             {
                 Console.WriteLine("Correct");
-                return 0.5;
+                hints++;
+                return true;
             }
         }
-        else if (userGuess == question.CorrectAnswerIndex)
+        else */if (userGuess == question.CorrectAnswerIndex)
         {
             Console.WriteLine("Correct");
-            return 1.0;
+            return true;
         }
 
         Console.WriteLine("Incorrect");
-        return 0.0;
+        return false;
     }
 
     public static void DisplayQuestion(Question question)
