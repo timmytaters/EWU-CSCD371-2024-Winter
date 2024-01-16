@@ -3,7 +3,6 @@
 public class Program
 {
     public static int hints = 0;
-    public static string hintFilePath = "Hints.txt";
     public static void Main(string[] args)
     {
         string filePath = GetFilePath();
@@ -80,7 +79,14 @@ public class Program
     public static Question[] LoadQuestions(string filePath)
     {
         string[] lines = File.ReadAllLines(filePath);
-        string[] hints = File.ReadAllLines(hintFilePath);
+        string[] hints = new string[7];
+        hints[0] = "Hint: He is talking to someone he dislikes";
+        hints[1] = "Hint: His eyes are a primary color";
+        hints[2] = "Hint: All you need is _";
+        hints[3] = "Hint: It's easier to do this with six fingers";
+        hints[4] = "Hint: What does Wesley fight in the swamp?";
+        hints[5] = "Hint: It is not a real poison";
+        hints[6] = "Hint: You can't be neither handed";
 
         Question[] questions = new Question[lines.Length / 5];
         for (int i = 0; i < questions.Length; i++)
