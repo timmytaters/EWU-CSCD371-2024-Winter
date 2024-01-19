@@ -5,6 +5,18 @@ namespace PrincessBrideTrivia.Tests;
 [TestClass]
 public class ProgramTests
 {
+    //(x,y,z) = correct, hints, adjusted answer; hints should never exceed correct
+    [TestMethod]
+    [DataRow(7,1,6.5)]
+    [DataRow(6,2,5)]
+    [DataRow(5,3,3.5)]
+    [DataRow(4,4,2)]
+    public void AdjustHints_AdjustsNumberCorrect(int numCorrect, int numHints, double expected)
+    {
+        double actual = Program.AdjustHints(numCorrect, numHints);
+        Assert.AreEqual(expected, actual);
+    }
+
     [TestMethod]
     public void LoadQuestions_RetrievesQuestionsFromFile()
     {

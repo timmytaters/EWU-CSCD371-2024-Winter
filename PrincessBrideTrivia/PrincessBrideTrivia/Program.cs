@@ -17,8 +17,12 @@ public class Program
                 numberCorrect++;
             }
         }
-        numberCorrect -= 0.5 * hints;
+        numberCorrect = AdjustHints(numberCorrect, hints);
         Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
+    }
+    public static double AdjustHints(double numberCorrect, int hints)
+    {
+        return numberCorrect - (0.5 * hints);
     }
 
     public static string GetPercentCorrect(double numberCorrectAnswers, int numberOfQuestions)
