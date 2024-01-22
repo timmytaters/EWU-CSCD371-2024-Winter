@@ -18,7 +18,7 @@ namespace Logger
         public override void Log(LogLevel logLevel, string message)
         {
             string log = DateTime.Now.ToString() + " " + this.ClassName + " " +logLevel + ": " + message;
-            File.AppendAllText(Filepath, log);
+            File.AppendAllText("NewLogTest.txt", log);
         }
     }
 }
