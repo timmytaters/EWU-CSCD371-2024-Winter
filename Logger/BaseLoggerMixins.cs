@@ -15,7 +15,7 @@ by automatically supplying the appropriate LogLevel. These methods should throw 
 There are a couple example unit tests to get you started.*/
 public static class BaseLoggerMixins
 {
-    public static void Error(this BaseLogger bl, string message, params object[] args)
+    public static void Error(this BaseLogger? bl, string message, params object[] args)
     {
         if (bl == null)
         {
@@ -27,7 +27,7 @@ public static class BaseLoggerMixins
             bl.Log(LogLevel.Error, postMessage);
         }
     }
-    public static void Warning(this BaseLogger bl, string message, params object[] args)
+    public static void Warning(this BaseLogger? bl, string message, params object[] args)
     {
         if (bl == null)
         {
@@ -39,7 +39,7 @@ public static class BaseLoggerMixins
             bl.Log(LogLevel.Warning, postMessage);
         }
     }
-    public static void Information(this BaseLogger bl, string message, params object[] args)
+    public static void Information(this BaseLogger? bl, string message, params object[] args)
     {
         if (bl == null)
         {
@@ -51,7 +51,7 @@ public static class BaseLoggerMixins
             bl.Log(LogLevel.Information, postMessage);
         }
     }
-    public static void Debug(this BaseLogger bl, string message, params object[] args)
+    public static void Debug(this BaseLogger? bl, string message, params object[] args)
     {
         if (bl == null)
         {

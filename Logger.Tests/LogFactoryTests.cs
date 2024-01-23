@@ -5,8 +5,8 @@ namespace Logger.Tests;
 [TestClass]
 public class LogFactoryTests
 {
-    private LogFactory _logFactory;
-    private BaseLogger _bl;
+    private LogFactory _logFactory = new();
+    private BaseLogger? _bl;
     [TestInitialize]
     public void Constructor()
     {
@@ -18,7 +18,11 @@ public class LogFactoryTests
     [TestMethod]
     public void CreateLogger_ClassName_Success()
     {
-        Assert.IsTrue(_bl.ClassName.Equals("class"));
+        Assert.IsNotNull(_bl);
+        if (_bl != null)
+        {
+            Assert.IsTrue(_bl.ClassName.Equals("class"));
+        }
     }
 
     [TestMethod]

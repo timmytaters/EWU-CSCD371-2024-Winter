@@ -8,7 +8,7 @@ namespace Logger.Tests;
 [TestClass]
 public class FileLoggerTests
 {
-    private FileLogger _fileLogger;
+    private FileLogger? _fileLogger;
     private readonly string _filePath = "test.txt";
     [TestInitialize]
     public void Constructor()
@@ -19,7 +19,11 @@ public class FileLoggerTests
     [TestMethod]
     public void Constructor_FilePath_Success()
     {
-        Assert.IsTrue(_filePath.Equals(_fileLogger.getFilePath()));
+        Assert.IsNotNull(_fileLogger);
+        if (_fileLogger != null)
+        {
+            Assert.IsTrue(_filePath.Equals(_fileLogger.getFilePath()));
+        }
     }
 
     [TestMethod]
@@ -32,16 +36,19 @@ public class FileLoggerTests
             FileStream file = File.Create(_filePath);
             file.Close();
         }
+        Assert.IsNotNull(_fileLogger);
+        if (_fileLogger != null)
+        {
+            _fileLogger.ClassName = "FileLoggerTests";
+            _fileLogger.Log(LogLevel.Error, message);
 
-        _fileLogger.ClassName = "FileLoggerTests";
-        _fileLogger.Log(LogLevel.Error, message);
+            StreamReader sr = new(_filePath);
+            string? actual = sr.ReadLine();
+            sr.Close();
+            //Unsure how to make the date times sync
+            string expected = DateTime.Now.ToString() + " FileLoggerTests Error: test message\n"; ;
 
-        StreamReader sr = new(_filePath);
-        string actual = sr.ReadLine();
-        sr.Close();
-        //Unsure how to make the date times sync
-        string expected = DateTime.Now.ToString() + " FileLoggerTests Error: test message\n"; ;
-
-        Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
