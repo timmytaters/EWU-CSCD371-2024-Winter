@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Logger.Tests;
 
@@ -24,7 +26,7 @@ public class LogFactoryTests
             Assert.IsNotNull(_bl.ClassName);
             if (_bl.ClassName != null)
             {
-                Assert.IsTrue(_bl.ClassName.Equals("class"));
+                Assert.IsTrue(_bl.ClassName.Equals("class", StringComparison.Ordinal));
             }
         }
     }
