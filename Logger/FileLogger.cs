@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 //It should take in a path to a file to write the log message to. When its Log method is called, it should
@@ -21,7 +22,7 @@ namespace Logger
         }
         public override void Log(LogLevel logLevel, string message)
         {
-            string log = DateTime.Now.ToString() + " " + this.ClassName + " " + logLevel + ": " + message + "\n";
+            string log = DateTime.Now.ToString(CultureInfo.CurrentCulture) + " " + this.ClassName + " " + logLevel + ": " + message + "\n";
             File.AppendAllText(_filename, log);
         }
         public string GetFilePath()

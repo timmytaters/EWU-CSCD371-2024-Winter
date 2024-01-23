@@ -4,7 +4,7 @@
 //If the file logger has not be configured in the LogFactory, its CreateLogger method should return null
 public class LogFactory
 {
-    private string? _filename = null;
+    private string? _filename;
     public BaseLogger? CreateLogger(string className)
     {
         if (_filename == null)

@@ -3,6 +3,7 @@ using System.Data.Common;
 using System.Dynamic;
 using System;
 using System.IO;
+using System.Globalization;
 
 namespace Logger;
 //Inside of BaseLoggerMixins implement extension methods on BaseLogger for
@@ -23,7 +24,7 @@ public static class BaseLoggerMixins
         }
         else
         {
-            string postMessage = string.Format(message, args);
+            string postMessage = string.Format(CultureInfo.CurrentCulture, message, args);
             bl.Log(LogLevel.Error, postMessage);
         }
     }
@@ -35,7 +36,7 @@ public static class BaseLoggerMixins
         }
         else
         {
-            string postMessage = string.Format(message, args);
+            string postMessage = string.Format(CultureInfo.CurrentCulture, message, args);
             bl.Log(LogLevel.Warning, postMessage);
         }
     }
@@ -47,7 +48,7 @@ public static class BaseLoggerMixins
         }
         else
         {
-            string postMessage = string.Format(message, args);
+            string postMessage = string.Format(CultureInfo.CurrentCulture, message, args);
             bl.Log(LogLevel.Information, postMessage);
         }
     }
@@ -59,7 +60,7 @@ public static class BaseLoggerMixins
         }
         else
         {
-            string postMessage = string.Format(message, args);
+            string postMessage = string.Format(CultureInfo.CurrentCulture,message, args);
             bl.Log(LogLevel.Debug, postMessage);
         }
     }
