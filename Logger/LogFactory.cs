@@ -5,7 +5,7 @@
 public class LogFactory
 {
     private string? _filename = null;
-    public BaseLogger CreateLogger(string className)
+    public BaseLogger? CreateLogger(string className)
     {
         if (_filename == null)
         {
@@ -20,7 +20,7 @@ public class LogFactory
     {
         _filename = filepath;
     }
-    public string GetFilename()
+    public string? GetFilename()
     {
         return _filename;
     }
