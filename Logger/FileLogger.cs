@@ -14,7 +14,7 @@ namespace Logger
 {
     public class FileLogger : BaseLogger
     {
-        private string _filename;
+        private readonly string _filename;
         public FileLogger(string filepath)
         {
             _filename = filepath;
@@ -24,7 +24,7 @@ namespace Logger
             string log = DateTime.Now.ToString() + " " + this.ClassName + " " + logLevel + ": " + message + "\n";
             File.AppendAllText(_filename, log);
         }
-        public string getFilePath()
+        public string GetFilePath()
         {
             return this._filename;
         }

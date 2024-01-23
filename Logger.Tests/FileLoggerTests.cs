@@ -22,7 +22,7 @@ public class FileLoggerTests
         Assert.IsNotNull(_fileLogger);
         if (_fileLogger != null)
         {
-            Assert.IsTrue(_filePath.Equals(_fileLogger.getFilePath()));
+            Assert.IsTrue(_filePath.Equals(_fileLogger.GetFilePath()));
         }
     }
 

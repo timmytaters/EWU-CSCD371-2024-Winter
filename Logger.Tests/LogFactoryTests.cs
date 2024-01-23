@@ -21,7 +21,11 @@ public class LogFactoryTests
         Assert.IsNotNull(_bl);
         if (_bl != null)
         {
-            Assert.IsTrue(_bl.ClassName.Equals("class"));
+            Assert.IsNotNull(_bl.ClassName);
+            if (_bl.ClassName != null)
+            {
+                Assert.IsTrue(_bl.ClassName.Equals("class"));
+            }
         }
     }
 

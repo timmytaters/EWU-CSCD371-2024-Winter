@@ -19,7 +19,7 @@ public static class BaseLoggerMixins
     {
         if (bl == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(bl));
         }
         else
         {
@@ -31,7 +31,7 @@ public static class BaseLoggerMixins
     {
         if (bl == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(bl));
         }
         else
         {
@@ -43,7 +43,7 @@ public static class BaseLoggerMixins
     {
         if (bl == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(bl));
         }
         else
         {
@@ -55,7 +55,7 @@ public static class BaseLoggerMixins
     {
         if (bl == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(bl));
         }
         else
         {
