@@ -15,45 +15,52 @@ by automatically supplying the appropriate LogLevel. These methods should throw 
 There are a couple example unit tests to get you started.*/
 public static class BaseLoggerMixins
 {
-    public static void Error(this BaseLogger bl, params string[] message)
+    public static void Error(this BaseLogger bl, string message, params object[] args)
     {
         if (bl == null)
         {
             throw new ArgumentNullException();
         }
-       bl.Log(LogLevel.Error, combine(message));
+        else
+        {
+            string postMessage = string.Format(message, args);
+            bl.Log(LogLevel.Error, postMessage);
+        }
     }
-    public static void Warning(this BaseLogger bl, params string[] message)
+    public static void Warning(this BaseLogger bl, string message, params object[] args)
     {
         if (bl == null)
         {
             throw new ArgumentNullException();
         }
-        bl.Log(LogLevel.Warning, combine(message));
+        else
+        {
+            string postMessage = string.Format(message, args);
+            bl.Log(LogLevel.Warning, postMessage);
+        }
     }
-    public static void Information(this BaseLogger bl, params string[] message)
+    public static void Information(this BaseLogger bl, string message, params object[] args)
     {
         if (bl == null)
         {
             throw new ArgumentNullException();
         }
-        bl.Log(LogLevel.Information, combine(message));
+        else
+        {
+            string postMessage = string.Format(message, args);
+            bl.Log(LogLevel.Information, postMessage);
+        }
     }
-    public static void Debug(this BaseLogger bl, params string[] message)
+    public static void Debug(this BaseLogger bl, string message, params object[] args)
     {
         if (bl == null)
         {
             throw new ArgumentNullException();
         }
-        bl.Log(LogLevel.Debug, combine(message));
-    }
-    public static string combine(string[] message)
-    {
-        string newMessage = "";
-        for(int i = 0; i < message.Length; i++)
+        else
         {
-            newMessage += (message[i] + " ");
+            string postMessage = string.Format(message, args);
+            bl.Log(LogLevel.Debug, postMessage);
         }
-        return newMessage;
     }
 }

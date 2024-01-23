@@ -4,20 +4,24 @@
 //If the file logger has not be configured in the LogFactory, its CreateLogger method should return null
 public class LogFactory
 {
-    public string Filepath {get; set;}
+    private string _filename = null;
     public BaseLogger CreateLogger(string className)
     {
-        if (Filepath == null)
+        if (_filename == null)
         {
             return null;
         }
         else
         {
-            return new FileLogger(className);
+            return new FileLogger(_filename) { ClassName = className};
         }
     }
     public void ConfigureFileLogger(string filepath)
     {
-        Filepath = filepath;
+        _filename = filepath;
+    }
+    public string GetFilename()
+    {
+        return _filename;
     }
 }

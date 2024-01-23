@@ -12,13 +12,21 @@ The format may vary, but an example might look like this "10/7/2019 12:38:59 AM 
 //Use the nameof() operator when identifying the class name to the logger 
 namespace Logger
 {
-    internal class FileLogger : BaseLogger
+    public class FileLogger : BaseLogger
     {
-        public FileLogger(string classname) { }
+        private string _filename;
+        public FileLogger(string filepath)
+        {
+            _filename = filepath;
+        }
         public override void Log(LogLevel logLevel, string message)
         {
-            string log = DateTime.Now.ToString() + " " + this.ClassName + " " +logLevel + ": " + message;
-            File.AppendAllText("NewLogTest.txt", log);
+            string log = DateTime.Now.ToString() + " " + this.ClassName + " " + logLevel + ": " + message + "\n";
+            File.AppendAllText(_filename, log);
+        }
+        public string getFilePath()
+        {
+            return this._filename;
         }
     }
 }
