@@ -8,25 +8,25 @@ namespace Logger.Tests;
 public class LogFactoryTests
 {
     private LogFactory _logFactory = new();
-    private BaseLogger? _bl;
+    private BaseLogger? _baseLoggerVar;
     [TestInitialize]
     public void Constructor()
     {
         _logFactory = new();
         _logFactory.ConfigureFileLogger("test.txt");
-        _bl = _logFactory.CreateLogger("class");
+        _baseLoggerVar = _logFactory.CreateLogger("class");
     }
 
     [TestMethod]
     public void CreateLogger_ClassName_Success()
     {
-        Assert.IsNotNull(_bl);
-        if (_bl != null)
+        Assert.IsNotNull(_baseLoggerVar);
+        if (_baseLoggerVar != null)
         {
-            Assert.IsNotNull(_bl.ClassName);
-            if (_bl.ClassName != null)
+            Assert.IsNotNull(_baseLoggerVar.ClassName);
+            if (_baseLoggerVar.ClassName != null)
             {
-                Assert.IsTrue(_bl.ClassName.Equals("class", StringComparison.Ordinal));
+                Assert.IsTrue(_baseLoggerVar.ClassName.Equals("class", StringComparison.Ordinal));
             }
         }
     }
@@ -40,14 +40,14 @@ public class LogFactoryTests
     [TestMethod]
     public void CreateLogger_Constructor_Success()
     {
-        Assert.AreNotEqual(null, _bl);
+        Assert.AreNotEqual(null, _baseLoggerVar);
     }
     [TestMethod]
     public void CreateLogger_Constructor_Fail()
     {
         _logFactory.ConfigureFileLogger(null);
-        _bl = _logFactory.CreateLogger("class");
-        Assert.AreEqual(null, _bl);
+        _baseLoggerVar = _logFactory.CreateLogger("class");
+        Assert.AreEqual(null, _baseLoggerVar);
     }
 
 }

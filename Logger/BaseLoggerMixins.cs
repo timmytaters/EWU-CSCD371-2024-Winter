@@ -16,52 +16,52 @@ by automatically supplying the appropriate LogLevel. These methods should throw 
 There are a couple example unit tests to get you started.*/
 public static class BaseLoggerMixins
 {
-    public static void Error(this BaseLogger? bl, string message, params object[] args)
+    public static void Error(this BaseLogger? baseLogger, string message, params object[] args)
     {
-        if (bl == null)
+        if (baseLogger == null)
         {
-            throw new ArgumentNullException(nameof(bl));
+            throw new ArgumentNullException(nameof(baseLogger));
         }
         else
         {
             string postMessage = string.Format(CultureInfo.CurrentCulture, message, args);
-            bl.Log(LogLevel.Error, postMessage);
+            baseLogger.Log(LogLevel.Error, postMessage);
         }
     }
-    public static void Warning(this BaseLogger? bl, string message, params object[] args)
+    public static void Warning(this BaseLogger? baseLogger, string message, params object[] args)
     {
-        if (bl == null)
+        if (baseLogger == null)
         {
-            throw new ArgumentNullException(nameof(bl));
+            throw new ArgumentNullException(nameof(baseLogger));
         }
         else
         {
             string postMessage = string.Format(CultureInfo.CurrentCulture, message, args);
-            bl.Log(LogLevel.Warning, postMessage);
+            baseLogger.Log(LogLevel.Warning, postMessage);
         }
     }
-    public static void Information(this BaseLogger? bl, string message, params object[] args)
+    public static void Information(this BaseLogger? baseLogger, string message, params object[] args)
     {
-        if (bl == null)
+        if (baseLogger == null)
         {
-            throw new ArgumentNullException(nameof(bl));
+            throw new ArgumentNullException(nameof(baseLogger));
         }
         else
         {
             string postMessage = string.Format(CultureInfo.CurrentCulture, message, args);
-            bl.Log(LogLevel.Information, postMessage);
+            baseLogger.Log(LogLevel.Information, postMessage);
         }
     }
-    public static void Debug(this BaseLogger? bl, string message, params object[] args)
+    public static void Debug(this BaseLogger? baseLogger, string message, params object[] args)
     {
-        if (bl == null)
+        if (baseLogger == null)
         {
-            throw new ArgumentNullException(nameof(bl));
+            throw new ArgumentNullException(nameof(baseLogger));
         }
         else
         {
             string postMessage = string.Format(CultureInfo.CurrentCulture,message, args);
-            bl.Log(LogLevel.Debug, postMessage);
+            baseLogger.Log(LogLevel.Debug, postMessage);
         }
     }
 }
