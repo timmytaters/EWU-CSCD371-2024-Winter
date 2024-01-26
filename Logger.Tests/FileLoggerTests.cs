@@ -2,6 +2,7 @@
 using System.IO;
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Logger.Tests;
 
@@ -40,15 +41,13 @@ public class FileLoggerTests
         if (_fileLogger != null)
         {
             _fileLogger.ClassName = "FileLoggerTests";
-            _fileLogger.Log(LogLevel.Error, message);
+            _fileLogger.Log(LogLevel.Debug, message);
 
-            StreamReader sr = new(_filePath);
-            string? actual = sr.ReadLine();
-            sr.Close();
+            string actual = File.ReadLines(_filePath).Last();
             //Unsure how to make the date times sync
-            string expected = DateTime.Now.ToString(CultureInfo.CurrentCulture) + " FileLoggerTests Error: test message\n"; ;
+            string expected = DateTime.Now.ToString(CultureInfo.CurrentCulture) + " FileLoggerTests Debug: test message"; ;
             //Commented out until test resolved
-            //Assert.AreEqual(expected, actual);
+            Assert.IsTrue(expected.Equals(actual, StringComparison.Ordinal));
         }
     }
 }
