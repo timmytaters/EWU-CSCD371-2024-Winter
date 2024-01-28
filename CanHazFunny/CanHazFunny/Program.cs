@@ -2,9 +2,9 @@
 using System;
 ﻿namespace CanHazFunny;
 
-class Program 
+public static class Program 
 { 
-        static void Main(string[] args)
+        public static void Main()
         {
             //new Jester(new SomeReallyCoolOutputClass(), new SomeJokeServiceClass()).TellJoke();
             Jester jester = new(new JokePrint(), new JokeService());
