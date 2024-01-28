@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CanHazFunny
+namespace CanHazFunny;
+
+public interface IJokeService
 {
-    public interface IJokeService
-    {
-        public abstract string GetJoke();
-    }
+    public abstract string GetJoke();
 }

@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CanHazFunny
+namespace CanHazFunny;
+
+public class JokePrint : IJokePrint
 {
-    public class JokePrint : IJokePrint
+    public void PrintJoke(string joke)
     {
-        public void PrintJoke(string joke)
-        {
-            Console.WriteLine(joke);
-        }
+        Console.WriteLine(joke);
     }
 }

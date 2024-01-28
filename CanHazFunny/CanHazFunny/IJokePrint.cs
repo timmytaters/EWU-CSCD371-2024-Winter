@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CanHazFunny
+namespace CanHazFunny;
+
+public interface IJokePrint
 {
-    public interface IJokePrint
-    {
-        public abstract void PrintJoke(String joke);
-    }
+    public abstract void PrintJoke(String joke);
 }
