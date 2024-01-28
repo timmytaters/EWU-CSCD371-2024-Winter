@@ -8,6 +8,7 @@
 	  <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
 	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	  <Nullable>enable</Nullable>
+	  <AnalysisLevel>latest-recommended</AnalysisLevel>
   </PropertyGroup>
 
 </Project>

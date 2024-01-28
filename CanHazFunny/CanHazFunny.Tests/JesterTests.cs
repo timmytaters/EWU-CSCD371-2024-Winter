@@ -10,7 +10,7 @@ namespace CanHazFunny.Tests;
 [TestClass]
 public class JesterTests
 {
-    public Jester testJester = new(new JokePrint(), new JokeService());
+    private static readonly Jester testJester = new(new JokePrint(), new JokeService());
     [TestMethod]
     public void JokePrint_GivenString_Prints()
     {
