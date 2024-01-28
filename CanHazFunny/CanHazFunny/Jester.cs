@@ -11,8 +11,8 @@ namespace CanHazFunny
 {
     public class Jester(IJokePrint jokePrint, IJokeService jokeService) 
     {
-        public IJokePrint jokePrint { get; set; } = jokePrint;
-        public IJokeService jokeService { get; set; } = jokeService;
+        public IJokePrint JokePrint { get; set; } = jokePrint;
+        public IJokeService JokeService { get; set; } = jokeService;
         private HttpClient HttpClient { get; } = new();
     }
 }
