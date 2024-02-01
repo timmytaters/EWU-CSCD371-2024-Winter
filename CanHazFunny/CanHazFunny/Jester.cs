@@ -11,16 +11,21 @@ namespace CanHazFunny;
 
 public class Jester
 {
-    private readonly IJokePrint JokePrint;
-    private readonly IJokeService JokeService;
-
+    private IJokePrint jokePrint;
+    private IJokeService jokeService;
+    //Supressed because the exceptions below ensure that they are not null
+#pragma warning disable CS8618 
     public Jester(IJokePrint jokePrint, IJokeService jokeService)
+#pragma warning restore CS8618 
     {
         ArgumentNullException.ThrowIfNull(jokePrint);
         ArgumentNullException.ThrowIfNull(jokeService);
         JokePrint = jokePrint;
         JokeService = jokeService;
     }
+
+    public IJokeService JokeService { get => jokeService; set => jokeService = value; }
+    public IJokePrint JokePrint { get => jokePrint; set => jokePrint = value; }
 
     public void TellJoke()
     {
