@@ -8,5 +8,5 @@ namespace CanHazFunny;
 
 public interface IJokePrint
 {
-    public abstract void PrintJoke(String joke);
+    public abstract void PrintJoke(string joke);
 }

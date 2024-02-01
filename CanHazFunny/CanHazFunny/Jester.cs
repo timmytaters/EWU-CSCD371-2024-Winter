@@ -9,9 +9,21 @@ using System.Threading.Tasks;
 //The joke should be written to the output dependency. ✔❌
 namespace CanHazFunny;
 
-public class Jester(IJokePrint jokePrint, IJokeService jokeService) 
+public class Jester
 {
-    public IJokePrint JokePrint { get; set; } = jokePrint;
-    public IJokeService JokeService { get; set; } = jokeService;
-    private HttpClient HttpClient { get; } = new();
+    private readonly IJokePrint JokePrint;
+    private readonly IJokeService JokeService;
+
+    public Jester(IJokePrint jokePrint, IJokeService jokeService)
+    {
+        ArgumentNullException.ThrowIfNull(jokePrint);
+        ArgumentNullException.ThrowIfNull(jokeService);
+        JokePrint = jokePrint;
+        JokeService = jokeService;
+    }
+
+    public void TellJoke()
+    {
+        JokePrint.PrintJoke(JokeService.GetJoke());
+    }
 }

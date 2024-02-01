@@ -9,7 +9,7 @@ public class JokeService : IJokeService
     public string GetJoke()
     {
         string joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
-        while (joke.Contains("Chuck Norris"))
+        while (joke.Contains("Chuck Norris") || joke.Contains("chuck norris"))
         {
             joke = HttpClient.GetStringAsync("https://geek-jokes.sameerkumar.website/api").Result;
         }

@@ -8,7 +8,7 @@ public static class Program
         {
             //new Jester(new SomeReallyCoolOutputClass(), new SomeJokeServiceClass()).TellJoke();
             Jester jester = new(new JokePrint(), new JokeService());
-            jester.JokePrint.PrintJoke(jester.JokeService.GetJoke());
+            jester.TellJoke();
 
         }
 }
