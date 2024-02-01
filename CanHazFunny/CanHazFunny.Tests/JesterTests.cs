@@ -27,5 +27,17 @@ public class JesterTests
     {
         Assert.IsFalse(testJester.JokeService.GetJoke().Contains("Chuck Norris"));
     }
+    [TestMethod]
+    public void TellJoke_OnReturn_PrintsAndNoChuck()
+    {
+        StringWriter sw = new();
+        Console.SetOut(sw);
+        testJester.TellJoke();
+        string actual = sw.ToString().Trim();
+        Assert.IsFalse(actual.Contains("Chuck Norris"));
+        Assert.IsFalse(actual.Contains("chuck norris"));
+        Assert.IsTrue(actual.Length>0);
+        Console.SetOut(Console.Out);
+    }
 }
 
