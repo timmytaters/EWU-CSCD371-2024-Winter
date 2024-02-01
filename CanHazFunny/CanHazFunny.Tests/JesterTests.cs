@@ -39,5 +39,17 @@ public class JesterTests
         Assert.IsTrue(actual.Length>0);
         Console.SetOut(Console.Out);
     }
+    [TestMethod]
+    public void Constructor_NullIJokePrint_ThrowsArgumentNullException()
+    {
+        JokeService testJokeService = new();
+        Assert.ThrowsException<ArgumentNullException>(() => { Jester jester = new(null!, testJokeService); });
+    }
+    [TestMethod]
+    public void Constructor_NullIJokeService_ThrowsArgumentNullException()
+    {
+        JokePrint testJokePrint = new JokePrint();  
+        Assert.ThrowsException<ArgumentNullException>(() => { Jester jester = new(testJokePrint, null!); });
+    }
 }
 
