@@ -1,9 +1,11 @@
-﻿namespace Logger;
+﻿/*
+ * Define a full name record (first, last, middle) handling optional and null appropriately. ❌✔
+Provide a comment on the full name record on why you selected to define a value or a reference type and ❌✔
+Provide a comment on the full name record on why or why not the type is immutable. ❌✔
+*/
+namespace Logger;
 
-// I choose to define FullNameRecord as a value type record beacuse it a
-// immutable data structure that stores a person's full name.
-
-// FullNameRecord is immutable because it is a value type record. 
+//I believe that fullname should be a reference type that is immutable because people's names are able to be changed
 
 public record FullName
 {
@@ -16,5 +18,22 @@ public record FullName
         FirstName = firstName ?? "";
         MiddleName = middleName ?? "";
         LastName = lastName ?? "";
+    }
+    public string GetFullName()
+    {
+        string name = "";
+        if(FirstName != null)
+        {
+            name += FirstName;
+        }
+        if(MiddleName != null)
+        {
+            name += " " + MiddleName;
+        }
+        if(LastName != null)
+        {
+            name += " " + LastName;
+        }
+        return name.Trim();
     }
 }
