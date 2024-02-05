@@ -10,7 +10,7 @@ Provide a comment on each interface method explaining why you implemented it imp
 
 namespace Logger;
 
-public record Student(Guid Id, FullName StudentName) : IEntity
+public record Student(Guid Id, FullName StudentName) : EntityBase
 {
     // the Name property is implemented explicitly to provide a consistent naming convention.
     public string Name => $"Student: {StudentName.GetFullName}";
