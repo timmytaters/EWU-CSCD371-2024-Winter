@@ -10,7 +10,7 @@ using System;
 public abstract record EntityBase : IEntity 
 { 
 
-    public Guid Id { get; init; }  
-    public abstract string Name { get; set; }
+    public Guid Id { get => Id; init => Guid.NewGuid(); }  
+    public abstract string Name { get; }
 
 }

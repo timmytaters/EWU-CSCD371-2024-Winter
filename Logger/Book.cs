@@ -10,9 +10,7 @@ Provide a comment on each interface method explaining why you implemented it imp
 
 namespace Logger;
 
-public record Book(Guid Id, string Title) : EntityBase
+public record Book(string Title) : EntityBase
 {
-    // the Name property is implemented explicitly to provide a consistent naming convention.
-    public string Name => $"Book: {Title}";
-
+    public override string Name { get => Title; }
 }

@@ -9,9 +9,12 @@ Provide a comment on each interface method explaining why you implemented it imp
  */
 namespace Logger;
 
-public record Employee(Guid Id, FullName EmployeeName) : EntityBase
+public record class Employee : Person
 {
-    // the Name property is implemented explicitly to provide a consistent naming convention.
-    public string Name => $"Employee: {EmployeeName.GetFullName}";
+    public int EmployeeID { get; set; }
+    public Employee(FullName name, int emid) : base(name)
+    {
+        EmployeeID = emid;
+    }
 
 }
