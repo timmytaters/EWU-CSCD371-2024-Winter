@@ -22,15 +22,15 @@ public record FullName
     public string GetFullName()
     {
         string name = "";
-        if(FirstName != null)
+        if(FirstName != null && FirstName != "")
         {
             name += FirstName;
         }
-        if(MiddleName != null)
+        if(MiddleName != null&&MiddleName != "")
         {
             name += " " + MiddleName;
         }
-        if(LastName != null)
+        if(LastName != null && LastName != "")
         {
             name += " " + LastName;
         }
