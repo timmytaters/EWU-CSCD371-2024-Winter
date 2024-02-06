@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logger.Tests
+namespace Logger.Tests;
+
+[TestClass]
+public class EmployeeTests
 {
-    [TestClass]
-    public class EmployeeTests
+    [TestMethod]
+    public void EmployeeTest()
     {
-        [TestMethod]
-        public void EmployeeTest()
-        {
-            FullName testName = new("Timothy", "August", "Nelson");
-            Employee testEmployee = new(testName, 181);
-            Assert.AreEqual<string>("Timothy August Nelson", testEmployee.Name);
-            Assert.AreEqual<int>(181, testEmployee.EmployeeID);
-        }
+        FullName testName = new("Timothy", "August", "Nelson");
+        Employee testEmployee = new(testName, 181);
+        Assert.AreEqual<string>("Timothy August Nelson", testEmployee.Name);
+        Assert.AreEqual<int>(181, testEmployee.EmployeeID);
     }
 }

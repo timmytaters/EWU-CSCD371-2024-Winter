@@ -5,16 +5,15 @@ using System.IO;
 using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace Logger.Tests
+namespace Logger.Tests;
+
+[TestClass]
+public class BookTests
 {
-    [TestClass]
-    public class BookTests
+    [TestMethod]
+    public void BookTest()
     {
-        [TestMethod]
-        public void BookTest()
-        {
-            Book testBook = new("Of Mice and Men");
-            Assert.AreEqual<string>("Of Mice and Men", testBook.Name);
-        }
+        Book testBook = new("Of Mice and Men");
+        Assert.AreEqual<string>("Of Mice and Men", testBook.Name);
     }
 }
