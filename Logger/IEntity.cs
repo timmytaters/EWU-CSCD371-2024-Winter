@@ -9,6 +9,5 @@ namespace Logger;
 public interface IEntity
 {
     public Guid Id { get; init; }
-    //Set since some names are changeable
     public string Name { get;}
 }
