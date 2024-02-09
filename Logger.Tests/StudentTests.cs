@@ -25,8 +25,8 @@ public class StudentTests
         FullName testName = new("Timothy", "August", "Nelson");
         #pragma warning disable IDE0017 
         Student testStudent = new(testName, 3.55);
-        #pragma warning restore IDE0017
         testStudent.GPA = 2.1;
+        #pragma warning restore IDE0017
         Assert.AreEqual<double>(2.1, testStudent.GPA);
     }
 

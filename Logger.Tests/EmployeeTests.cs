@@ -24,8 +24,9 @@ public class EmployeeTests
         FullName testName = new("Timothy", "August", "Nelson");
         #pragma warning disable IDE0017
         Employee testEmployee = new(testName, 181);
-        #pragma warning restore IDE0017
         testEmployee.EmployeeID = 21;
+        #pragma warning restore IDE0017
+
         Assert.AreEqual<double>(21, testEmployee.EmployeeID);
     }
 
