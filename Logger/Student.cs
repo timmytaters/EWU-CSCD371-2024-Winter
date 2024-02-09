@@ -12,7 +12,12 @@ namespace Logger;
 
 public record class Student : Person
 {
+
+    //GPA is implemented implicitely because it does not cause collision 
+    // since it is not derived from the base class
     public double GPA { get; set; }
+
+    // Student Name is explicit because it can cause collision
     public Student(FullName name, double gpa) : base(name) 
     {
         GPA = gpa;

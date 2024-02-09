@@ -11,7 +11,12 @@ namespace Logger;
 
 public record class Employee : Person
 {
+
+    //EmployeeID is implemented implicitely because it does not cause collision 
+    // since it is not derived from the base class
     public int EmployeeID { get; set; }
+
+    // Name is explicit because it can cause collision
     public Employee(FullName name, int emid) : base(name)
     {
         EmployeeID = emid;
