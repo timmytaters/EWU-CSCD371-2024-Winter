@@ -11,11 +11,20 @@ namespace Logger.Tests;
 public class StudentTests
 {
     [TestMethod]
-    public void StudentTest()
+    //getter also tested
+    public void StudentConstructor_GivenProperties_Succeeds()
     {
         FullName testName = new("Timothy", "August", "Nelson");
         Student testStudent = new(testName, 3.55);
         Assert.AreEqual<string>("Timothy August Nelson", testStudent.Name);
         Assert.AreEqual<double>(3.55, testStudent.GPA);
+    }
+    [TestMethod]
+    public void StudentGPASet_GivenDouble_SetsGPA()
+    {
+        FullName testName = new("Timothy", "August", "Nelson");
+        Student testStudent = new(testName, 3.55);
+        testStudent.GPA = 2.1;
+        Assert.AreEqual<double>(2.1, testStudent.GPA);
     }
 }
