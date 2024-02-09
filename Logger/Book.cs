@@ -12,5 +12,8 @@ namespace Logger;
 
 public record Book(string Title) : EntityBase
 {
+
+    // Name is explicit because it can cause collision
     public override string Name { get => Title; }
+
 }
