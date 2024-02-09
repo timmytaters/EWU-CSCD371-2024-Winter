@@ -71,4 +71,35 @@ public class StorageTest
         Assert.IsFalse(storage.Contains(book));
     }
 
+    [TestMethod]
+    public void Remove_NonExistentEntity_NoChange()
+    {
+        // Arrange
+        Storage storage = new();
+        IEntity student = new Student(new FullName("John", "", "Doe"), 3.5);
+        IEntity nonExistentStudent = new Student(new FullName("Non", "", "Existent"), 2.0);
+        storage.Add(student);
+
+        // Act
+        storage.Remove(nonExistentStudent);
+
+        // Assert
+        Assert.IsTrue(storage.Contains(student));
+        Assert.IsFalse(storage.Contains(nonExistentStudent));
+    }
+
+    [TestMethod]
+    public void Get_NonExistingEntity_ReturnsNull()
+    {
+        // Arrange
+        Storage storage = new();
+        Guid guid = Guid.NewGuid();
+
+        // Act
+        var retrievedEntity = storage.Get(guid);
+
+        // Assert
+        Assert.IsNull(retrievedEntity);
+    }
+
 }
