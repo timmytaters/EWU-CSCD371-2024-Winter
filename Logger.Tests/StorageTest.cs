@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Logger;
 
 namespace Logger.Tests;
+#pragma warning disable CA1707
 
 [TestClass]
 public class StorageTest
@@ -16,7 +17,7 @@ public class StorageTest
     public void Add_StudentEntity_AddSucessful()
     {
         // Arrange
-        Storage storage = new Storage();
+        Storage storage = new();
         IEntity student = new Student(new FullName("Timothy", "", "Nelson"), 4.0);
 
         // Act
@@ -30,7 +31,7 @@ public class StorageTest
     public void Remove_StudentEntity_RemovesSucessful()
     {
         // Arrange
-        Storage storage = new Storage();
+        Storage storage = new();
         IEntity student = new Student(new FullName("Robert", "", "Garcia"), 3.0);
         storage.Add(student);
 
@@ -45,7 +46,7 @@ public class StorageTest
     public void Add_BookEntity_AddSucessful()
     {
         // Arrange
-        Storage storage = new Storage();
+        Storage storage = new();
         IEntity book = new Book("The Fault in our Stars");
 
         // Act
@@ -59,7 +60,7 @@ public class StorageTest
     public void Remove_BookEntity_RemoveSucessful()
     {
         // Arrange
-        Storage storage = new Storage();
+        Storage storage = new();
         IEntity book = new Book("50 Shades of Grey");
         storage.Add(book);
 
