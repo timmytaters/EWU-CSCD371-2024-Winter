@@ -26,10 +26,12 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<NoWarn>1701;1702;CA1707</NoWarn>
+		<WarningsNotAsErrors>CA1707</WarningsNotAsErrors>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <NoWarn>1701;1702;CA1707</NoWarn>
+	  <WarningsNotAsErrors>CA1707</WarningsNotAsErrors>
 	</PropertyGroup>
 
 </Project>
