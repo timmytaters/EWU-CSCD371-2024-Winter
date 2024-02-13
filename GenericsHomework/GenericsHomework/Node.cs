@@ -3,13 +3,13 @@
     public class Node<T>
     {
         public T Data { get; set; }
-        public Node<T> Next { get; set; }
+        public Node<T> Next { get; private set; }
 
         public Node(T data)
         {
             Data = data;
+            //Set to this so not nullable
             Next = this;
-
         }
 
         public void Append(T value)
@@ -20,32 +20,24 @@
             }
 
             Node<T> newNode = new(value);
-
-            Node<T> current = this;
-            while (current.Next != null)
-            {
-                current = current.Next;
-            }
-
-            newNode.Next = current.Next;
-            current.Next = newNode;
-
+            newNode.Next = this.Next;
+            this.Next = newNode;
         }
-
         public bool Exists(T value)
         {
             Node<T> current = this;
+            T startValue = this.Data;
 
             do
             {
-                if (current.Data.Equals(value))
+                if (current.Data!=null&&current.Data.Equals(value))
                 {
                     return true;
 
                 }
                 current = current.Next;
 
-            } while (current != this);
+            } while (current.Data!=null && !current.Data.Equals(startValue));
             return false;
 
         }

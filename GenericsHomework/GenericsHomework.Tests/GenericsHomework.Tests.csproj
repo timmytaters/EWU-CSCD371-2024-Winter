@@ -29,4 +29,12 @@
 	  </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GenericsHomework\GenericsHomework.csproj" />
+  </ItemGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<NoWarn>1701;1702;CA1707</NoWarn>
+	</PropertyGroup>
+
 </Project>
