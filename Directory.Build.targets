@@ -1,5 +1,0 @@
-<Project>
-  <Target Name="Target" AfterTargets="Build">
-      <Message Text="This Is an After Build Target" Importance="high" />
-  </Target>
-</Project>

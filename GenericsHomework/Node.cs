@@ -51,6 +51,12 @@ public class Node<T>
 
     public override string ToString()
     {
-        return this.ToString();
+        if(this == null || this.Data == null || Data.ToString() == null)
+        {
+            return "Null";
+        }
+#pragma warning disable CS8603 // Possible null reference return. Can suppress since null checked abov
+        return Data.ToString();
+#pragma warning restore CS8603 // Possible null reference return.
     }
 }

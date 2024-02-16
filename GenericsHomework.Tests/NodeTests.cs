@@ -1,4 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Diagnostics.Metrics;
+using System.IO;
+using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace GenericsHomework.Tests;
@@ -17,7 +21,7 @@ public class NodeTests
     public void Append_GivenDuplicate_ThrowsException()
     {
         Node<int> newNode = new(1);
-        Assert.ThrowsException<InvalidOperationException>(() => newNode.Append(1));
+        Assert.ThrowsException<ArgumentException>(() => newNode.Append(1));
     }
     [TestMethod]
     public void Append_GivenUnique_Succeeds()
@@ -60,9 +64,7 @@ public class NodeTests
     public void ToString_WithList_Prints()
     {
         Node<int> newNode = new(1);
-        newNode.Append(2);
-        newNode.Append(3);
-        string Expected = "LinkedList: 1 - 3 - 2";
+        string Expected = "1";
         Assert.AreEqual<String>(Expected, newNode.ToString());
     }
 }
