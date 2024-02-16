@@ -6,47 +6,46 @@ using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace GenericsHomework.Tests;
-#pragma warning disable CS8603
 
 [TestClass]
 public class NodeTests
 {
     [TestMethod]
-    public void Constructor_GivenData_Succeeds()
+    public void ConstructorGivenDataSucceeds()
     {
         Node<int> newNode = new(1);
         Assert.AreEqual<Node<int>>(newNode, newNode.Next);
         Assert.AreEqual<int>(1, newNode.Data);
     }
     [TestMethod]
-    public void Append_GivenDuplicate_ThrowsException()
+    public void AppendGivenDuplicateThrowsException()
     {
         Node<int> newNode = new(1);
         Assert.ThrowsException<ArgumentException>(() => newNode.Append(1));
     }
     [TestMethod]
-    public void Append_GivenUnique_Succeeds()
+    public void AppendGivenUniqueSucceeds()
     {
         Node<int> newNode = new(1);
         newNode.Append(2);
         Assert.AreEqual(2, newNode.Next.Data);
     }
     [TestMethod]
-    public void Exists_DoesExist_True()
+    public void ExistsDoesExistTrue()
     {
         Node<int> newNode = new(1);
         newNode.Append(2);
         Assert.AreEqual<Boolean>(true, newNode.Exists(2));
     }
     [TestMethod]
-    public void Exists_DoesntExist_False()
+    public void ExistsDoesntExistFalse()
     {
         Node<int> newNode = new(1);
         newNode.Append(3);
         Assert.AreEqual<Boolean>(false, newNode.Exists(2));
     }
     [TestMethod]
-    public void Clear_OnClear_NoOtherNodes()
+    public void ClearOnClearNoOtherNodes()
     {
         Node<int> newNode = new(1);
         newNode.Append(3);
@@ -54,7 +53,7 @@ public class NodeTests
         Assert.AreEqual<Boolean>(false, newNode.Exists(3));
     }
     [TestMethod]
-    public void Clear_OnClear_NodeRemains()
+    public void ClearOnClearNodeRemains()
     {
         Node<int> newNode = new(1);
         newNode.Append(3);
@@ -62,14 +61,14 @@ public class NodeTests
         Assert.AreEqual<Boolean>(true, newNode.Exists(1));
     }
     [TestMethod]
-    public void ToString_WithList_Prints()
+    public void ToStringWithListPrints()
     {
         Node<int> newNode = new(1);
         string Expected = "1";
         Assert.AreEqual<String>(Expected, newNode.ToString());
     }
     [TestMethod]
-    public void Clear_MultipleNodes_True()
+    public void ClearMultipleNodesTrue()
     {
         Node<string> newNode = new("I Loveeeee .Net!!!");
         newNode.Append("Node1");
@@ -78,4 +77,3 @@ public class NodeTests
         Assert.AreEqual(newNode, newNode.Next);
     }
 }
-#pragma warning restore CS8603
