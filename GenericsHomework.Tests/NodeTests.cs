@@ -67,4 +67,13 @@ public class NodeTests
         string Expected = "1";
         Assert.AreEqual<String>(Expected, newNode.ToString());
     }
+    [TestMethod]
+    public void Clear_MultipleNodes_True()
+    {
+        Node<string> newNode = new("I Loveeeee .Net!!!");
+        newNode.Append("Node1");
+        newNode.Append("Node2");
+        newNode.Clear();
+        Assert.AreEqual(newNode, newNode.Next);
+    }
 }

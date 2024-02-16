@@ -44,9 +44,9 @@ public class Node<T>
 
     public void Clear()
     {
-        // it is sufficient to only set Next to itself, we need to unlink the current node from the list
-        // garbage collector built into C# will automaticaly collect the rest of the other nodes once there is no available reference to them
-        this.Next = this;
+        // It is reasonable to set Next to itself since the garbage collector is designed to handle reference objects effectively.
+        // By doing this, we allow the garbage collector to reclaim memory appropriately
+        Next = this;
     }
 
     public override string ToString()
