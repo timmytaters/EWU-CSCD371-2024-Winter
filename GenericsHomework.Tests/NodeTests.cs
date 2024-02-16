@@ -6,6 +6,7 @@ using Xunit;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace GenericsHomework.Tests;
+#pragma warning disable CS8603
 
 [TestClass]
 public class NodeTests
@@ -77,3 +78,4 @@ public class NodeTests
         Assert.AreEqual(newNode, newNode.Next);
     }
 }
+#pragma warning restore CS8603
