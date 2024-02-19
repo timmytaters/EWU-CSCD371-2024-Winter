@@ -1,4 +1,16 @@
-﻿namespace Calculate;
+﻿/*Define a Calculator class ❌✔
+Define static Add, Subtract, Multiple, and Divide methods that have two parameters and return a third parameter. ❌✔
+Define a read-only property, MathematicalOperations, of type System.Collections.Generics.IReadOnlyDictionary<TKey,TValue> that:
+is initialized to a System.Collections.Generics.Dictionary<<TKey,TValue> instance that. ❌✔
+Uses char for the key corresponding to the operators +, -, *, and /. ❌✔
+Has values that correspond with the Add, Subtract, Multiple, and Divide methods. ❌✔
+Implement a TryCalculate method following "TryParse" pattern ❌✔
+Valid calculation expressions include such strings as "3 + 4", "42 - 2", etc. ❌✔
+If there is no whitespace around the operator, you can assume the calculation is invalid and return false. Similarly if the operands are not integers. ❌✔
+Use string.Split(), pattern matching, logical and operators to parse the string in their entirety ❌✔
+Index into the MathematicalOperations method using the operator parsed during pattern matching to find the corresponding implementation and invoke it. ❌✔*/
+
+namespace Calculate;
 
 public class Calculator
 {
