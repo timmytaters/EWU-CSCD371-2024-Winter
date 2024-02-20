@@ -25,7 +25,7 @@ public class Program
         do
 #pragma warning disable CS8604 // Possible null reference argument, input never null since either empty string or readline (when readline isnt null)
         {
-            program.WriteLine("Please enter something: ");
+            program.WriteLine("Please enter the problem (num operator num): ");
             if(program.ReadLine == null)
             {
                 input = "";
