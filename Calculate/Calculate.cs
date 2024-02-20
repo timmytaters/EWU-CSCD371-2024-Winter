@@ -14,7 +14,7 @@ namespace Calculate;
 
 public class Calculator
 {
-    public IReadOnlyDictionary<char, Func<int, int, int>> Operations { get; } =
+    public IReadOnlyDictionary<char, Func<int, int, int>> MathematicalOperations { get; } =
         new Dictionary<char, Func<int, int, int>>()
         {
             ['+'] = Addition,
@@ -50,12 +50,12 @@ public class Calculator
         {
             if (int.TryParse(components[0], out int operand1) && int.TryParse(components[2], out int operand2))
             {
-                if (Operations.ContainsKey(components[1][0]))
+                if (MathematicalOperations.ContainsKey(components[1][0]))
                 {
                     try
                     {
                         char op = components[1][0];
-                        Func<int, int, int> operation = Operations[op];
+                        Func<int, int, int> operation = MathematicalOperations[op];
                         result = operation(operand1, operand2);
                         return true;
                     }

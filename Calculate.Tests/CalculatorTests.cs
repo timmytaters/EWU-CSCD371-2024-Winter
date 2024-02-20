@@ -2,10 +2,11 @@ namespace Calculate.Tests;
 
 
 [TestClass]
-public class CalculatorTests
+public class CalculateTests
 {
     [TestMethod]
     public void TestMethod1()
     {
+
     }
 }
