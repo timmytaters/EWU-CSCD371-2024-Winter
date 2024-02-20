@@ -12,7 +12,7 @@ Index into the MathematicalOperations method using the operator parsed during pa
 
 namespace Calculate;
 
-public class Calculator
+public class Calculate
 {
     public IReadOnlyDictionary<char, Func<int, int, int>> MathematicalOperations { get; } =
         new Dictionary<char, Func<int, int, int>>()

@@ -18,7 +18,7 @@ public class Program
     public static void Main(string[] args)
     {
         Program program = new();
-        Calculator calculator = new();
+        Calculate calculator = new();
         string input;
         int? answer;
 
