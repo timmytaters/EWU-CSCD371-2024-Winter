@@ -32,7 +32,6 @@ public class CalculateTests
     [TestMethod]
     public void TryCalculate_Add_Succeeds()
     {
-        Program program = new();
         Calculate calculator = new();
         int? answer;
         Assert.IsTrue(calculator.TryCalculate("21 + 42", out answer));
@@ -41,7 +40,6 @@ public class CalculateTests
     [TestMethod]
     public void TryCalculate_Sub_Succeeds()
     {
-        Program program = new();
         Calculate calculator = new();
         int? answer;
         Assert.IsTrue(calculator.TryCalculate("84 - 21", out answer));
@@ -50,7 +48,6 @@ public class CalculateTests
     [TestMethod]
     public void TryCalculate_Mult_Succeeds()
     {
-        Program program = new();
         Calculate calculator = new();
         int? answer;
         Assert.IsTrue(calculator.TryCalculate("9 * 7", out answer));
@@ -59,10 +56,17 @@ public class CalculateTests
     [TestMethod]
     public void TryCalculate_Div_Succeeds()
     {
-        Program program = new();
         Calculate calculator = new();
         int? answer;
         Assert.IsTrue(calculator.TryCalculate("189 / 3", out answer));
         Assert.AreEqual<int?>(63, answer);
+    }
+    [TestMethod]
+    public void TryCalculate_NotEnoughArgs_Fails()
+    {
+        Calculate calculator = new();
+        int? answer;
+        Assert.IsFalse(calculator.TryCalculate(" 3 *", out answer));
+        Assert.IsNull(answer);
     }
 }
