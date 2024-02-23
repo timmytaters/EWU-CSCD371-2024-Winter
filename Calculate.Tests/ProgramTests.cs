@@ -38,4 +38,22 @@ public class ProgramTests
         program.WriteLine("Yes");
         Assert.AreEqual<string>("Yes", Output);
     }
+    [TestMethod]
+    public void Program_WriteLineAndReadLine_Succeeds()
+    {
+        // Arrange
+        string expected = "Hello frieds!";
+        string actual = string.Empty;
+        Program program = new()
+        {
+            WriteLine = (s) => actual = s,
+            ReadLine = () => expected
+        };
+
+        // Act
+        program.WriteLine(expected);
+
+        // Assert
+        Assert.AreEqual(expected, actual);
+    }
 }

@@ -26,16 +26,7 @@ public class Program
 #pragma warning disable CS8604 // Possible null reference argument, input never null since either empty string or readline (when readline isnt null)
         {
             program.WriteLine("Please enter the problem (num operator num): ");
-            if(program.ReadLine == null)
-            {
-                input = "";
-            }
-            else
-            {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type, okay since null checked above
-                input = program.ReadLine();
-#pragma warning restore CS8600 
-            }
+            input = program.ReadLine() ?? "";
 
         } while (!calculator.TryCalculate(input, out answer));
 #pragma warning restore CS8604 
