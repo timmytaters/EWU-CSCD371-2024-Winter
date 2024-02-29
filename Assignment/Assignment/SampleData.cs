@@ -43,7 +43,10 @@ public class SampleData : ISampleData
     Consider "selecting" only the states and calling ToArray() to retrieve an array of all the state names. ❌✔
     Given the array, consider using string.Join to combine the list into a single string. ❌✔*/
     public string GetAggregateSortedListOfStatesUsingCsvRows()
-        => throw new NotImplementedException();
+    {
+        IEnumerable<String> states = GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
+        return string.Join(",", states);
+    }
 
     /*4.Implement the ISampleData.People property to return all the items in People.csv as Person objects ❌✔
     Use ISampleData.CsvRows as the source of the data. ❌✔
