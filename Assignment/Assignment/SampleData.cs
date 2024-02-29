@@ -15,6 +15,8 @@ public class SampleData : ISampleData
     Using LINQ, skip the first row in the People.csv. ❌✔
     Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔*/
     public IEnumerable<string> CsvRows{
+        //File.ReadLines internally handles the resource management and ensures proper disposal of resources once it finishes reading the lines.
+        //It's designed to be used without requiring you to manually dispose of resources.
         get
         {
             string csvFilePath = "People.csv";
@@ -28,8 +30,12 @@ public class SampleData : ISampleData
     Sort the list alphabetically. ❌✔
     Include a test that leverages a hardcoded list of addresses. ❌✔
     Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔*/
-    public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
-        => throw new NotImplementedException();
+    public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
+    {
+        IEnumerable<String> states = CsvRows.Select(CsvRows => CsvRows.Split(",")[6].Trim()).Distinct().OrderBy(state=>state);
+        return states;
+
+    }
 
     /*3.Implement ISampleData.GetAggregateSortedListOfStatesUsingCsvRows() to return a string that contains a unique, comma separated list of states. ❌✔
 
