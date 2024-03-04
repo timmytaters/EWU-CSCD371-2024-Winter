@@ -14,14 +14,12 @@ public class SampleData : ISampleData
     /*Change the "Copy to" property on People.csv to "Copy if newer" so that the file is deployed along with your test project. ❌✔
     Using LINQ, skip the first row in the People.csv. ❌✔
     Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔*/
+    private IEnumerable<string> csvRows = File.ReadLines("People.csv").Skip(1);
     public IEnumerable<string> CsvRows{
         //File.ReadLines internally handles the resource management and ensures proper disposal of resources once it finishes reading the lines.
         //It's designed to be used without requiring you to manually dispose of resources.
-        get
-        {
-            string csvFilePath = "People.csv";
-            return File.ReadLines(csvFilePath).Skip(1);
-        }
+        get { return csvRows; }
+        set { csvRows = value; }
     }
 
     /*2. Implement IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() to return a sorted, unique list of states. ❌✔
@@ -32,9 +30,8 @@ public class SampleData : ISampleData
     Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔*/
     public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
     {
-        IEnumerable<String> states = CsvRows.Select(CsvRows => CsvRows.Split(",")[6].Trim()).Distinct().OrderBy(state=>state);
+        IEnumerable<String> states = CsvRows.Select(CsvRows => CsvRows.Split(",")[6].Trim()).Distinct().OrderBy(state => state);
         return states;
-
     }
 
     /*3.Implement ISampleData.GetAggregateSortedListOfStatesUsingCsvRows() to return a string that contains a unique, comma separated list of states. ❌✔
@@ -54,7 +51,22 @@ public class SampleData : ISampleData
     Be sure that Person.Address is also populated. ❌✔
     Adding null validation to all the Person and Address properties is optional.
     Consider using ISampleData.CsvRows in your test to verify your results. ❌✔*/
-    public IEnumerable<IPerson> People => throw new NotImplementedException();
+    public IEnumerable<IPerson> People
+    {
+        get
+        {
+            IEnumerable<IPerson> peopleOut = new List<IPerson>();
+            IEnumerable<String[]> peopleIn = CsvRows.Select(CsvRows => CsvRows.Split(','));
+            foreach(String[] person in peopleIn) 
+            { 
+                string[] curPerson = person;
+                peopleOut = peopleOut.Append(new Person(curPerson[1], curPerson[2], new Address(curPerson[4], curPerson[5], curPerson[6], curPerson[7]), curPerson[3]));
+            }
+            peopleOut = peopleOut.OrderBy(p => p.Address.State).ThenBy(p => p.Address.City).ThenBy(p => p.Address.Zip);
+            return peopleOut;
+
+        }
+    }
 
     /*5.Implement ISampleDate.FilterByEmailAddress(Predicate<string> filter) to return a list of names where the email address matches the filter. ❌✔
     Use ISampleData.People for your data source. ❌✔*/

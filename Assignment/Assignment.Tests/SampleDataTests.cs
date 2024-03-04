@@ -60,6 +60,50 @@ public class SampleDataTests
         string expectedStates = "CA,FL,MT";
         Assert.Equal(expectedStates, result);
     }
+    [Fact]
+    public void PeopleTest()
+    {
+        SampleData sampleData = new();
+        // Arrange
+        List<String> csvRows =
+        [
+             "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+            "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+            "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721"
+         ];
 
+        // Mock the behavior of the CsvRows property
+        sampleData.CsvRows = csvRows;
+
+        // Act
+        IEnumerable<IPerson> result = sampleData.People;
+
+        // Assert
+        IEnumerable<IPerson> expected = new List<IPerson>();
+        expected = expected.Append(new Person("Chadd", "Stennine", new Address("94148 Kings Terrace", "Long Beach", "CA", "59721"), "cstennine2@wired.com"));
+        expected = expected.Append(new Person("Karin", "Joder", new Address("03594 Florence Park", "Tampa", "FL", "71961"), "kjoder1@quantcast.com"));
+        expected = expected.Append(new Person("Priscilla", "Jenyns", new Address("7884 Corry Way", "Helena", "MT", "70577"), "pjenyns0@state.gov"));
+        Assert.Equal(expected.ElementAt(0).FirstName, result.ElementAt(0).FirstName);
+        Assert.Equal(expected.ElementAt(0).LastName, result.ElementAt(0).LastName);
+        Assert.Equal(expected.ElementAt(0).EmailAddress, result.ElementAt(0).EmailAddress);
+        Assert.Equal(expected.ElementAt(0).Address.StreetAddress, result.ElementAt(0).Address.StreetAddress);
+        Assert.Equal(expected.ElementAt(0).Address.City, result.ElementAt(0).Address.City);
+        Assert.Equal(expected.ElementAt(0).Address.State, result.ElementAt(0).Address.State);
+        Assert.Equal(expected.ElementAt(0).Address.Zip, result.ElementAt(0).Address.Zip);
+        Assert.Equal(expected.ElementAt(1).FirstName, result.ElementAt(1).FirstName);
+        Assert.Equal(expected.ElementAt(1).LastName, result.ElementAt(1).LastName);
+        Assert.Equal(expected.ElementAt(1).EmailAddress, result.ElementAt(1).EmailAddress);
+        Assert.Equal(expected.ElementAt(1).Address.StreetAddress, result.ElementAt(1).Address.StreetAddress);
+        Assert.Equal(expected.ElementAt(1).Address.City, result.ElementAt(1).Address.City);
+        Assert.Equal(expected.ElementAt(1).Address.State, result.ElementAt(1).Address.State);
+        Assert.Equal(expected.ElementAt(1).Address.Zip, result.ElementAt(1).Address.Zip);
+        Assert.Equal(expected.ElementAt(2).FirstName, result.ElementAt(2).FirstName);
+        Assert.Equal(expected.ElementAt(2).LastName, result.ElementAt(2).LastName);
+        Assert.Equal(expected.ElementAt(2).EmailAddress, result.ElementAt(2).EmailAddress);
+        Assert.Equal(expected.ElementAt(2).Address.StreetAddress, result.ElementAt(2).Address.StreetAddress);
+        Assert.Equal(expected.ElementAt(2).Address.City, result.ElementAt(2).Address.City);
+        Assert.Equal(expected.ElementAt(2).Address.State, result.ElementAt(2).Address.State);
+        Assert.Equal(expected.ElementAt(2).Address.Zip, result.ElementAt(2).Address.Zip);
+    }
 }
 
