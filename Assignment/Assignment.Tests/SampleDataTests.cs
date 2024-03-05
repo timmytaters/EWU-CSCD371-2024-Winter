@@ -105,5 +105,75 @@ public class SampleDataTests
         Assert.Equal(expected.ElementAt(2).Address.State, result.ElementAt(2).Address.State);
         Assert.Equal(expected.ElementAt(2).Address.Zip, result.ElementAt(2).Address.Zip);
     }
+
+    [Fact]
+    public void EmailFilterTest()
+    {
+        SampleData sampleData = new();
+        // Arrange
+        List<String> csvRows =
+        [
+             "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+            "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+            "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721"
+        ];
+        // Mock the behavior of the CsvRows property
+        sampleData.CsvRows = csvRows;
+        Predicate<string> filter = email => email.EndsWith(".com", StringComparison.OrdinalIgnoreCase);
+
+        //Act
+        var matches = sampleData.FilterByEmailAddress(filter).ToList();
+
+        //Assert
+        Assert.Equal(2, matches.Count);
+        Assert.Equal(("Chadd", "Stennine"), matches[0]);
+        Assert.Equal(("Karin", "Joder"), matches[1]);
+    }
+
+    [Fact]
+    public void TestGetAggregateListOfStatesGivenPeopleCollection()
+    {
+        SampleData sampleData = new();
+        // Arrange
+        List<String> csvRows =
+        [
+             "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+            "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+            "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721"
+         ];
+
+        // Mock the behavior of the CsvRows property
+        sampleData.CsvRows = csvRows;
+
+        // Act
+        string result = sampleData.GetAggregateListOfStatesGivenPeopleCollection(sampleData.People);
+
+        // Assert
+        string expectedStates = "CA,FL,MT";
+        Assert.Equal(expectedStates, result);
+    }
+
+    [Fact]
+    public void GetAggregateListOfStatesGivenPeopleAndCsvEqual()
+    {
+        SampleData sampleData = new();
+        // Arrange
+        List<String> csvRows =
+        [
+             "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
+            "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
+            "3,Chadd,Stennine,cstennine2@wired.com,94148 Kings Terrace,Long Beach,CA,59721"
+         ];
+
+        // Mock the behavior of the CsvRows property
+        sampleData.CsvRows = csvRows;
+
+        // Act
+        string cresult = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
+        string presult = sampleData.GetAggregateListOfStatesGivenPeopleCollection(sampleData.People);
+
+        // Assert
+        Assert.Equal(cresult, presult);
+    }
 }
 

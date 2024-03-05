@@ -4,6 +4,7 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Net.NetworkInformation;
 using System.Reflection.Metadata;
 using System.Threading.Channels;
+using System.Text;
 
 namespace Assignment;
 
@@ -70,16 +71,22 @@ public class SampleData : ISampleData
 
     /*5.Implement ISampleDate.FilterByEmailAddress(Predicate<string> filter) to return a list of names where the email address matches the filter. ❌✔
     Use ISampleData.People for your data source. ❌✔*/
-    public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
-        Predicate<string> filter) => throw new NotImplementedException();
+    public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
+    {
+        IEnumerable<IPerson> people = People.Where(p => filter(p.EmailAddress));
+        return people.Select(p => (p.FirstName, p.LastName));
+    }
 
     /*6.Implement ISampleData.GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people) to return a string that contains a unique, comma-separated list of states. ❌✔
     Use the people parameter from ISampleData.People property for your data source. ❌✔
     At a minimum, use the System.Linq.Enumerable.Aggregate` LINQ method to create your result. ❌✔
     Don't forget the list should be unique. ❌✔
     It is recommended that, at a minimum, you use ISampleData.GetUniqueSortedListOfStatesGivenCsvRows to validate your result.*/
-    public string GetAggregateListOfStatesGivenPeopleCollection(
-        IEnumerable<IPerson> people) => throw new NotImplementedException();
+    public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)
+    {
+        IEnumerable<string> uniqueSortedStates = people.Select(person => person.Address.State).Distinct().OrderBy(state => state);
+        return uniqueSortedStates.Aggregate(((concat, str) => $"{concat},{str}"));
+    }
 
     /*7.Given the implementation of Node in Assignment5
     Implement IEnumerable<T> to return all the items in the "circle" of items. ❌✔
