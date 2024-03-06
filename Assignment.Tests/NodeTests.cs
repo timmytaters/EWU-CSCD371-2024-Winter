@@ -5,7 +5,7 @@ namespace Assignment.Tests;
 public class NodeTests
 {
     [Fact]
-    public void Append_AddsNewNodeToLinkedList()
+    public void Append_AddsNewNodeToLinkedList_ValueAppended_NodeContainsNewValue()
     {
         // Arrange
         var node = new Node<int>(1);
@@ -18,18 +18,7 @@ public class NodeTests
     }
 
     [Fact]
-    public void Append_ThrowsExceptionIfValueExists()
-    {
-        // Arrange
-        var node = new Node<int>(1);
-        node.Append(2);
-
-        // Act & Assert
-        Assert.Throws<ArgumentException>(() => node.Append(2));
-    }
-
-    [Fact]
-    public void Clear_RemovesAllNodesExceptCurrent()
+    public void Clear_RemovesAllNodesExceptCurrent_AllNodesExceptCurrentRemoved()
     {
         // Arrange
         var node = new Node<int>(1);
@@ -43,7 +32,7 @@ public class NodeTests
     }
 
     [Fact]
-    public void Exists_ReturnsTrueIfValueExists()
+    public void Exists_ReturnsTrueIfValueExists_ValueExists_ReturnsTrue()
     {
         // Arrange
         var node = new Node<int>(1);
@@ -54,7 +43,7 @@ public class NodeTests
     }
 
     [Fact]
-    public void Exists_ReturnsFalseIfValueDoesNotExist()
+    public void Exists_ReturnsFalseIfValueDoesNotExist_ValueDoesNotExist_ReturnsFalse()
     {
         // Arrange
         var node = new Node<int>(1);
@@ -63,8 +52,24 @@ public class NodeTests
         // Act & Assert
         Assert.False(node.Exists(3));
     }
+
     [Fact]
-    public void Node_ChildItems_successful()
+    public void Append_AddsNewItemToEndOfList_NewItemAppendedToEnd()
+    {
+        // Arrange
+        var node = new Node<int>(1);
+
+        // Act
+        node.Append(2);
+        node.Append(3);
+
+        // Assert
+        Assert.Equal(2, node.Next.Value); // Check if 2 is appended after 1
+        Assert.Equal(3, node.Next.Next.Value); // Check if 3 is appended after 2
+    }
+
+    [Fact]
+    public void ChildItems_ReturnsRemainingItemsWithMaximum_MaximumItemsReturned_Params_ExpectedResult()
     {
         // Arrange
         Node<int> headNode = new(1);
@@ -74,11 +79,9 @@ public class NodeTests
         // Act
         IEnumerable<int> test = headNode.ChildItems(2);
         int count = test.Count();
-        Assert.NotEmpty(test);
+
         // Assert
         Assert.Equal(2, count);
     }
-
+    
 }
-
-

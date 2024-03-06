@@ -23,6 +23,11 @@ public class Node<T> : IEnumerable<T>
     }
     public void Append(T value)
     {
+        if (Exists(value))
+        {
+            throw new ArgumentException($"The value already exists in the linked list", nameof(value));
+        }
+
         // Find the last node in the linked list
         Node<T> lastNode = this;
         while (lastNode.Next != this)
