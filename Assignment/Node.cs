@@ -71,10 +71,10 @@ public class Node<T> : IEnumerable<T>
     }
     public IEnumerable<T> ChildItems(int maximum)
     {
-        Node<T> current = Next; // Start from the next node (skip the current one)
+        Node<T> current = this.Next; // Start from the next node (skip the current one)
         int count = 0; // Track the number of items yielded
 
-        while (current != this.Next && count < maximum)
+        while (current != this && count < maximum)
         {
             yield return current.Value;
             current = current.Next;
