@@ -74,7 +74,7 @@ public class Node<T> : IEnumerable<T>
         Node<T> current = Next; // Start from the next node (skip the current one)
         int count = 0; // Track the number of items yielded
 
-        while (current != this && count < maximum)
+        while (current != this.Next && count < maximum)
         {
             yield return current.Value;
             current = current.Next;
