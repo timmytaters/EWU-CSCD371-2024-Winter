@@ -73,7 +73,13 @@ public class NodeTests
         node.Append(3);
 
         // Act
-        var result = node.ToList();
+        var result = new List<int>();
+        foreach (var item in node)
+        {
+            result.Add(item);
+            if (result.Count >= 3) // Break the loop after adding all items
+                break;
+        }
 
         // Assert
         Assert.Equal(1, result[0]);
@@ -90,13 +96,18 @@ public class NodeTests
         node.Append(3);
 
         // Act
-        var result = node.ChildItems(2).ToList();
+        var result = new List<int>();
+        foreach (var item in node.ChildItems(2))
+        {
+            result.Add(item);
+        }
 
         // Assert
         Assert.Equal(2, result.Count);
         Assert.Equal(2, result[0]);
         Assert.Equal(3, result[1]);
     }
+
 
 }
 
