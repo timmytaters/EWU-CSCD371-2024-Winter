@@ -67,14 +67,14 @@ public class NodeTests
     public void Node_ChildItems_successful()
     {
         // Arrange
-        Node<int> headNode = new Node<int>(1);
+        Node<int> headNode = new(1);
         headNode.Append(2);
         headNode.Append(8);
 
         // Act
         IEnumerable<int> test = headNode.ChildItems(2);
         int count = test.Count();
-
+        Assert.NotEmpty(test);
         // Assert
         Assert.Equal(2, count);
     }

@@ -31,7 +31,7 @@ public class Node<T> : IEnumerable<T>
         }
 
         // Create a new node with the provided value
-        Node<T> newNode = new Node<T>(value);
+        Node<T> newNode = new(value);
 
         // Append the new node to the end of the linked list
         lastNode.Next = newNode;
