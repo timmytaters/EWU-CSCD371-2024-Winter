@@ -76,18 +76,15 @@ public class Node<T> : IEnumerable<T>
     public IEnumerable<T> ChildItems(int max)
     {
         int i = 0;
-        Node<T> curr = this;
-        Node<T> myList = new(curr.Value); // Initialize myList with the value of the next node
-        while (i < max)
+        Node<T> current = this.Next; // Start from the next node (skip the current one)
+
+        while (current != this && i < max)
         {
-            curr = curr.Next;
-            myList.Append(curr.Value);
+            yield return current.Value;
+            current = current.Next;
             i++;
         }
-
-        IEnumerable<T> list = myList;
-
-        return list;
     }
+
 
 }
