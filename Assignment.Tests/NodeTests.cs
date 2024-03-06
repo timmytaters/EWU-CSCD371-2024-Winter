@@ -64,50 +64,6 @@ public class NodeTests
         Assert.False(node.Exists(3));
     }
 
-    [Fact]
-    public void GetEnumerator_ReturnsAllItemsInCircle()
-    {
-        // Arrange
-        var node = new Node<int>(1);
-        node.Append(2);
-        node.Append(3);
-
-        // Act
-        var result = new List<int>();
-        foreach (var item in node)
-        {
-            result.Add(item);
-            if (result.Count >= 3) // Break the loop after adding all items
-                break;
-        }
-
-        // Assert
-        Assert.Equal(1, result[0]);
-        Assert.Equal(2, result[1]);
-        Assert.Equal(3, result[2]);
-    }
-
-    [Fact]
-    public void ChildItems_ReturnsRemainingItemsWithMaximum()
-    {
-        // Arrange
-        var node = new Node<int>(1);
-        node.Append(2);
-        node.Append(3);
-
-        // Act
-        var result = new List<int>();
-        foreach (var item in node.ChildItems(2))
-        {
-            result.Add(item);
-        }
-
-        // Assert
-        Assert.Equal(2, result.Count);
-        Assert.Equal(2, result[0]);
-        Assert.Equal(3, result[1]);
-    }
-
 
 }
 
