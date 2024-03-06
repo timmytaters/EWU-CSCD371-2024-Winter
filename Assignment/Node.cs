@@ -72,7 +72,7 @@ public class Node<T> : IEnumerable<T>
     public IEnumerable<T> ChildItems(int max)
     {
         int i = 0;
-        Node<T> curr = this.Next; // Start from the next node (skip the current one)
+        Node<T> curr = this;
         Node<T> myList = new(curr.Value); // Initialize myList with the value of the next node
         while (i < max)
         {
