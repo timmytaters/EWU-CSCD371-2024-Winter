@@ -23,17 +23,21 @@ public class Node<T> : IEnumerable<T>
     }
     public void Append(T value)
     {
-        if (Exists(value))
+        // Find the last node in the linked list
+        Node<T> lastNode = this;
+        while (lastNode.Next != this)
         {
-            throw new ArgumentException($"The value already exists in the linked list", nameof(value));
+            lastNode = lastNode.Next;
         }
 
-        Node<T> newNode = new(value)
-        {
-            Next = Next
-        };
-        Next = newNode;
+        // Create a new node with the provided value
+        Node<T> newNode = new Node<T>(value);
+
+        // Append the new node to the end of the linked list
+        lastNode.Next = newNode;
+        newNode.Next = this;
     }
+
 
     public void Clear()
     {
