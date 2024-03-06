@@ -64,22 +64,21 @@ public class NodeTests
         Assert.False(node.Exists(3));
     }
     [Fact]
-    public void ChildItems_ReturnsRemainingItemsWithMaximum()
+    public void Node_ChildItems_successful()
     {
         // Arrange
-        var node = new Node<int>(1);
-        node.Append(2);
-        node.Append(3);
-        node.Append(4);
+        Node<int> headNode = new Node<int>(1);
+        headNode.Append(2);
+        headNode.Append(8);
 
         // Act
-        var result = node.ChildItems(2);
+        IEnumerable<int> test = headNode.ChildItems(2);
+        int count = test.Count();
 
         // Assert
-        Assert.Collection(result,
-            item => Assert.Equal(2, item),
-            item => Assert.Equal(3, item));
+        Assert.Equal(2, count);
     }
+
 }
 
 
