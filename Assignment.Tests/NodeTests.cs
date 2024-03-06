@@ -63,8 +63,23 @@ public class NodeTests
         // Act & Assert
         Assert.False(node.Exists(3));
     }
+    [Fact]
+    public void ChildItems_ReturnsRemainingItemsWithMaximum()
+    {
+        // Arrange
+        var node = new Node<int>(1);
+        node.Append(2);
+        node.Append(3);
+        node.Append(4);
 
+        // Act
+        var result = node.ChildItems(2);
 
+        // Assert
+        Assert.Collection(result,
+            item => Assert.Equal(2, item),
+            item => Assert.Equal(3, item));
+    }
 }
 
 
