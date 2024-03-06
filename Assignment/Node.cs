@@ -69,16 +69,21 @@ public class Node<T> : IEnumerable<T>
     {
         return GetEnumerator();
     }
-    public IEnumerable<T> ChildItems(int maximum)
+    public IEnumerable<T> ChildItems(int max)
     {
-        Node<T> current = this.Next; // Start from the next node (skip the current one)
-        int count = 0; // Track the number of items yielded
-
-        while (current != this && count < maximum)
+        int i = 0;
+        Node<T> curr = this.Next; // Start from the next node (skip the current one)
+        Node<T> myList = new(curr.Value); // Initialize myList with the value of the next node
+        while (i < max)
         {
-            yield return current.Value;
-            current = current.Next;
-            count++;
+            curr = curr.Next;
+            myList.Append(curr.Value);
+            i++;
         }
+
+        IEnumerable<T> list = myList;
+
+        return list;
     }
+
 }
