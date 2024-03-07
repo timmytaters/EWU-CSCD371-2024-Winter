@@ -69,7 +69,7 @@ public class NodeTests
     }
 
     [Fact]
-    public void ChildItems_ReturnsRemainingItemsWithMaximum_MaximumItemsReturned_Params_ExpectedResult()
+    public void ChildItems_ReturnsRemainingItemsWithMaximum_MaximumItemsReturned()
     {
         // Arrange
         Node<int> headNode = new(1);
