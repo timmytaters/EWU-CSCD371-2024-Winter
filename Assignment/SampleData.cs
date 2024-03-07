@@ -29,7 +29,7 @@ public class SampleData : ISampleData
     Include a test that uses LINQ to verify the data is sorted correctly (do not use a hardcoded list). ❌✔*/
     public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
     {
-        IEnumerable<String> states = CsvRows.Select(CsvRows => CsvRows.Split(",")[6].Trim()).Distinct().OrderBy(state => state);
+        IEnumerable<string> states = CsvRows.Select(CsvRows => CsvRows.Split(",")[6].Trim()).Distinct().OrderBy(state => state);
         return states;
     }
 
