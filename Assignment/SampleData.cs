@@ -15,13 +15,11 @@ public class SampleData : ISampleData
     /*Change the "Copy to" property on People.csv to "Copy if newer" so that the file is deployed along with your test project. ❌✔
     Using LINQ, skip the first row in the People.csv. ❌✔
     Be sure to appropriately handle resource (IDisposable) items correctly if applicable (and it may not be depending on how you implement it). ❌✔*/
-    private IEnumerable<string> csvRows = File.ReadLines("People.csv").Skip(1);
-    public IEnumerable<string> CsvRows{
-        //File.ReadLines internally handles the resource management and ensures proper disposal of resources once it finishes reading the lines.
-        //It's designed to be used without requiring you to manually dispose of resources.
-        get { return csvRows; }
-        set { csvRows = value; }
-    }
+
+    //File.ReadLines internally handles the resource management and ensures proper disposal of resources once it finishes reading the lines.
+    //It's designed to be used without requiring you to manually dispose of resources.
+    public IEnumerable<string> CsvRows { get; set; } = File.ReadLines("People.csv").Skip(1);
+
 
     /*2. Implement IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() to return a sorted, unique list of states. ❌✔
     Use ISampleData.CsvRows for your data source. ❌✔
