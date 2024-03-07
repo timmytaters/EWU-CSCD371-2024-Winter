@@ -9,7 +9,7 @@ namespace Assignment.Tests;
 public class SampleDataTests
 {
     [Fact]
-    public void SkipingFirstRow_PeopleCSV_Successful()
+    public void SkippingFirstRow_PeopleCSV_Successful()
     {
         SampleData data = new ();
         var csvRows = data.CsvRows;
