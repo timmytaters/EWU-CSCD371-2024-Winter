@@ -22,7 +22,7 @@ public class SampleData : ISampleData
 
     public string GetAggregateSortedListOfStatesUsingCsvRows()
     {
-        IEnumerable<String> states = GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
+        IEnumerable<string> states = GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
         return string.Join(",", states);
     }
 
@@ -31,8 +31,8 @@ public class SampleData : ISampleData
         get
         {
             IEnumerable<IPerson> peopleOut = new List<IPerson>();
-            IEnumerable<String[]> peopleIn = CsvRows.Select(CsvRows => CsvRows.Split(','));
-            foreach(String[] person in peopleIn) 
+            IEnumerable<string[]> peopleIn = CsvRows.Select(CsvRows => CsvRows.Split(','));
+            foreach(string[] person in peopleIn) 
             { 
                 string[] curPerson = person;
                 peopleOut = peopleOut.Append(new Person(curPerson[1], curPerson[2], new Address(curPerson[4], curPerson[5], curPerson[6], curPerson[7]), curPerson[3]));

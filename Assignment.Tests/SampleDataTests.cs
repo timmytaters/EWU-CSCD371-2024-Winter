@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +18,11 @@ public class SampleDataTests
         Assert.DoesNotContain(csvRows.First(), "Id,FirstName,LastName,Email,StreetAddress,City,State,Zip");
     }
     [Fact]
-    public void TestGetUniqueSortedListOfStatesGivenCsvRows()
+    public void GetUniqueSortedListOfStates_GivenTestCsvRows_Successful()
     {
         SampleData sampleData = new();
         // Arrange
-        List<String> csvRows =
+        List<string> csvRows =
         [
              "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
             "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -39,11 +40,11 @@ public class SampleDataTests
         Assert.Equal(expectedStates, result);
     }
     [Fact]
-    public void TestGetAggregateSortedListOfStatesUsingCsvRows()
+    public void GetAggregateSortedListOfStates_UsingTestCsvRows_Successful()
     {
         SampleData sampleData = new();
         // Arrange
-        List<String> csvRows =
+        List<string> csvRows =
         [
              "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
             "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -61,11 +62,11 @@ public class SampleDataTests
         Assert.Equal(expectedStates, result);
     }
     [Fact]
-    public void PeopleTest()
+    public void People_UsingTestCsv_Successful()
     {
         SampleData sampleData = new();
         // Arrange
-        List<String> csvRows =
+        List<string> csvRows =
         [
              "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
             "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -107,11 +108,54 @@ public class SampleDataTests
     }
 
     [Fact]
-    public void EmailFilterTest()
+    public void GetUniqueSortedListOfStates_GivenActualCsvRows_Successful()
+    {
+        SampleData sampleData = new();
+
+        // Act
+        var result = sampleData.GetUniqueSortedListOfStatesGivenCsvRows();
+        var expectedStates = new List<string>();
+        string expectedStatesString = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
+        string[] expectedStatesArray = expectedStatesString.Split(',');
+        for(int i = 0; i < expectedStatesArray.Length; i++)
+        {
+            expectedStates.Add(expectedStatesArray[i]);
+        }
+
+        // Assert
+        Assert.Equal(expectedStates, result);
+    }
+    [Fact]
+    public void GetAggregateSortedListOfStates_UsingActualCsvRows_Successful()
+    {
+        SampleData sampleData = new();
+
+        // Act
+        string result = sampleData.GetAggregateSortedListOfStatesUsingCsvRows();
+
+        // Assert
+        string expectedStates = "AL,AZ,CA,DC,FL,GA,IN,KS,LA,MD,MN,MO,MT,NC,NE,NH,NV,NY,OR,PA,SC,TN,TX,UT,VA,WA,WV";
+        Assert.Equal(expectedStates, result);
+    }
+    [Fact]
+    public void People_UsingActualCsv_Successful()
+    {
+        SampleData sampleData = new();
+
+        // Act
+        IEnumerable<IPerson> result = sampleData.People;
+
+        // Assert
+        IEnumerable<IPerson> expected = new List<IPerson>();
+
+    }
+
+    [Fact]
+    public void EmailFilter_WithCSVAndFilter_Successful()
     {
         SampleData sampleData = new();
         // Arrange
-        List<String> csvRows =
+        List<string> csvRows =
         [
              "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
             "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -131,11 +175,11 @@ public class SampleDataTests
     }
 
     [Fact]
-    public void TestGetAggregateListOfStatesGivenPeopleCollection()
+    public void GetAggregateListOfStates_GivenPeopleCollection_Successful()
     {
         SampleData sampleData = new();
         // Arrange
-        List<String> csvRows =
+        List<string> csvRows =
         [
              "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
             "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
@@ -154,11 +198,11 @@ public class SampleDataTests
     }
 
     [Fact]
-    public void GetAggregateListOfStatesGivenPeopleAndCsvEqual()
+    public void AggregateListOfStates_GivenPeopleAndCsv_Equal()
     {
         SampleData sampleData = new();
         // Arrange
-        List<String> csvRows =
+        List<string> csvRows =
         [
              "1,Priscilla,Jenyns,pjenyns0@state.gov,7884 Corry Way,Helena,MT,70577",
             "2,Karin,Joder,kjoder1@quantcast.com,03594 Florence Park,Tampa,FL,71961",
