@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+using Assert = Xunit.Assert;
 
 namespace Assignment.Tests;
 
@@ -15,6 +17,21 @@ public class NodeTests
 
         // Assert
         Assert.Equal(2, node.Next.Value);
+    }
+
+    [Fact]
+    public void Append_WithDuplicateData_ThrowsException()
+    {
+        //Arrange
+        var node = new Node<int>(1);
+
+        //Assert
+        try
+        {
+            node.Append(1);
+            Assert.Fail();
+        }
+        catch (ArgumentException) { }
     }
 
     [Fact]
