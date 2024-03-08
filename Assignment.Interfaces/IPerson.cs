@@ -11,4 +11,5 @@ public interface IPerson
     IAddress Address { get; }
 
     string EmailAddress { get; }
+    bool ManualIsEqual(IPerson other);
 }

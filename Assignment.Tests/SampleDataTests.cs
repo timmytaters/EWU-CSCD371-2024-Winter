@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Assert = Xunit.Assert;
 
 namespace Assignment.Tests;
 public class SampleDataTests
@@ -84,27 +86,12 @@ public class SampleDataTests
         expected = expected.Append(new Person("Chadd", "Stennine", new Address("94148 Kings Terrace", "Long Beach", "CA", "59721"), "cstennine2@wired.com"));
         expected = expected.Append(new Person("Karin", "Joder", new Address("03594 Florence Park", "Tampa", "FL", "71961"), "kjoder1@quantcast.com"));
         expected = expected.Append(new Person("Priscilla", "Jenyns", new Address("7884 Corry Way", "Helena", "MT", "70577"), "pjenyns0@state.gov"));
-        Assert.Equal(expected.ElementAt(0).FirstName, result.ElementAt(0).FirstName);
-        Assert.Equal(expected.ElementAt(0).LastName, result.ElementAt(0).LastName);
-        Assert.Equal(expected.ElementAt(0).EmailAddress, result.ElementAt(0).EmailAddress);
-        Assert.Equal(expected.ElementAt(0).Address.StreetAddress, result.ElementAt(0).Address.StreetAddress);
-        Assert.Equal(expected.ElementAt(0).Address.City, result.ElementAt(0).Address.City);
-        Assert.Equal(expected.ElementAt(0).Address.State, result.ElementAt(0).Address.State);
-        Assert.Equal(expected.ElementAt(0).Address.Zip, result.ElementAt(0).Address.Zip);
-        Assert.Equal(expected.ElementAt(1).FirstName, result.ElementAt(1).FirstName);
-        Assert.Equal(expected.ElementAt(1).LastName, result.ElementAt(1).LastName);
-        Assert.Equal(expected.ElementAt(1).EmailAddress, result.ElementAt(1).EmailAddress);
-        Assert.Equal(expected.ElementAt(1).Address.StreetAddress, result.ElementAt(1).Address.StreetAddress);
-        Assert.Equal(expected.ElementAt(1).Address.City, result.ElementAt(1).Address.City);
-        Assert.Equal(expected.ElementAt(1).Address.State, result.ElementAt(1).Address.State);
-        Assert.Equal(expected.ElementAt(1).Address.Zip, result.ElementAt(1).Address.Zip);
-        Assert.Equal(expected.ElementAt(2).FirstName, result.ElementAt(2).FirstName);
-        Assert.Equal(expected.ElementAt(2).LastName, result.ElementAt(2).LastName);
-        Assert.Equal(expected.ElementAt(2).EmailAddress, result.ElementAt(2).EmailAddress);
-        Assert.Equal(expected.ElementAt(2).Address.StreetAddress, result.ElementAt(2).Address.StreetAddress);
-        Assert.Equal(expected.ElementAt(2).Address.City, result.ElementAt(2).Address.City);
-        Assert.Equal(expected.ElementAt(2).Address.State, result.ElementAt(2).Address.State);
-        Assert.Equal(expected.ElementAt(2).Address.Zip, result.ElementAt(2).Address.Zip);
+        for(int i = 0; i<3; i++)
+        {
+            IPerson expectedI = expected.ElementAt(i);
+            IPerson resultI = result.ElementAt(i);
+            Assert.True(expectedI.ManualIsEqual(resultI));
+        }
     }
 
     [Fact]
