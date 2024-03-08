@@ -22,16 +22,11 @@ public class NodeTests
     [Fact]
     public void Append_WithDuplicateData_ThrowsException()
     {
-        //Arrange
+        // Arrange
         var node = new Node<int>(1);
 
-        //Assert
-        try
-        {
-            node.Append(1);
-            Assert.Fail();
-        }
-        catch (ArgumentException) { }
+        // Act & Assert
+        Assert.Throws<ArgumentException>(() => node.Append(1));
     }
 
     [Fact]
@@ -100,5 +95,6 @@ public class NodeTests
         // Assert
         Assert.Equal(2, count);
     }
+
     
 }
