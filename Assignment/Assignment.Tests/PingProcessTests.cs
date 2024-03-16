@@ -57,8 +57,20 @@ public class PingProcessTests
     [TestMethod]
     public void RunTaskAsync_Success()
     {
-        // Do NOT use async/await in this test.
-        // Test Sut.RunTaskAsync("localhost");
+        // Arrange
+        var pingProcess = new PingProcess();
+
+        // Act
+        var resultTask = pingProcess.RunTaskAsync("localhost");
+        resultTask.Wait(); // Wait for the task to complete synchronously
+
+        // Get the result after the task has completed
+        var result = resultTask.Result;
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result.ExitCode == 0); // Assuming 0 indicates success
+        Assert.IsNotNull(result.StdOutput);
     }
 
     [TestMethod]
