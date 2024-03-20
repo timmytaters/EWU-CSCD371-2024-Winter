@@ -391,19 +391,17 @@ public sealed partial class WildcardPattern(string pattern, WildcardOptions opti
     public static string NormalizeLineEndings(string input, bool trimTrailingNewline = false)
     {
         // https://stackoverflow.com/questions/140926/normalize-newlines-in-c-sharp
-        input = MyRegex().Replace(input, Environment.NewLine);
+        input = Regex.Replace(input, @"\r\n|\n\r|\n|\r", Environment.NewLine);
 
         if (trimTrailingNewline && input.EndsWith(Environment.NewLine))
         {
-            input = input[..^Environment.NewLine.Length];
+            input = input.Substring(0, input.Length - Environment.NewLine.Length);
         }
 
         return input;
     }
-
-    [GeneratedRegex(@"\r\n|\n\r|\n|\r")]
-    private static partial Regex MyRegex();
 }
+
 
 /// <summary>
 /// A base class for parsers of <see cref="WildcardPattern"/> patterns.
