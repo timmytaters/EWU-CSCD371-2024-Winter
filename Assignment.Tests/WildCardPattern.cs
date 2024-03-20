@@ -163,8 +163,7 @@ public sealed class WildcardPattern
     /// <returns></returns>
     public static WildcardPattern Get(string pattern, WildcardOptions options)
     {
-        if (pattern == null)
-            throw new ArgumentNullException(nameof(pattern));
+        ArgumentNullException.ThrowIfNull(pattern);
 
         if (pattern.Length == 1 && pattern[0] == '*')
             return s_matchAllIgnoreCasePattern;
@@ -222,15 +221,9 @@ public sealed class WildcardPattern
     {
 #pragma warning disable 56506
 
-        if (pattern == null)
-        {
-            throw new ArgumentNullException(nameof(pattern));
-        }
+        ArgumentNullException.ThrowIfNull(pattern);
 
-        if (charsNotToEscape == null)
-        {
-            throw new ArgumentNullException(nameof(charsNotToEscape));
-        }
+        ArgumentNullException.ThrowIfNull(charsNotToEscape);
 
         char[] temp = new char[(pattern.Length * 2) + 1];
         int tempIndex = 0;
@@ -1020,14 +1013,9 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private class LiteralCharacterElement : QuestionMarkElement
+    private class LiteralCharacterElement(char literalCharacter) : QuestionMarkElement
     {
-        private readonly char _literalCharacter;
-
-        public LiteralCharacterElement(char literalCharacter)
-        {
-            _literalCharacter = literalCharacter;
-        }
+        private readonly char _literalCharacter = literalCharacter;
 
         public override void ProcessStringCharacter(
                         char currentStringCharacter,
@@ -1046,14 +1034,9 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private class BracketExpressionElement : QuestionMarkElement
+    private class BracketExpressionElement(Regex regex) : QuestionMarkElement
     {
-        private readonly Regex _Regex;
-
-        public BracketExpressionElement(Regex regex)
-        {
-            _Regex = regex ?? throw new ArgumentNullException(nameof(regex));
-        }
+        private readonly Regex _Regex = regex ?? throw new ArgumentNullException(nameof(regex));
 
         public override void ProcessStringCharacter(
                         char currentStringCharacter,
@@ -1161,7 +1144,7 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private struct CharacterNormalizer
+    private readonly struct CharacterNormalizer
     {
         private readonly CultureInfo _cultureInfo;
         private readonly bool _caseInsensitive;
