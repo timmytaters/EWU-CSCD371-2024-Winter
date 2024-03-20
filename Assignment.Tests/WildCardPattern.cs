@@ -393,7 +393,7 @@ public sealed partial class WildcardPattern(string pattern, WildcardOptions opti
         // https://stackoverflow.com/questions/140926/normalize-newlines-in-c-sharp
         input = Regex.Replace(input, @"\r\n|\n\r|\n|\r", Environment.NewLine);
 
-        if (trimTrailingNewline && input.EndsWith(Environment.NewLine))
+        if (trimTrailingNewline && input.EndsWith(Environment.NewLine, StringComparison.CurrentCulture))
         {
             input = input.Substring(0, input.Length - Environment.NewLine.Length);
         }
@@ -614,9 +614,9 @@ internal abstract class WildcardPatternParser
         parser.EndWildcardPattern();
     }
 
-    internal static Exception NewWildcardPatternException(string invalidPattern)
+    internal static ArgumentException NewWildcardPatternException(string invalidPattern)
     {
-        return new Exception(
+        return new ArgumentException(
                 $"The wildcard pattern, '{invalidPattern}', is invalid.");
     }
 };
@@ -636,7 +636,7 @@ internal abstract class WildcardPatternParser
 ///
 /// for a more cases see the unit-test file RegexTest.cs
 /// </remarks>
-internal class WildcardPatternToRegexParser : WildcardPatternParser
+internal sealed class WildcardPatternToRegexParser : WildcardPatternParser
 {
     private StringBuilder _regexPattern;
     private RegexOptions _regexOptions;
@@ -805,7 +805,7 @@ internal class WildcardPatternToRegexParser : WildcardPatternParser
     }
 }
 
-internal class WildcardPatternMatcher
+internal sealed class WildcardPatternMatcher
 {
     private readonly PatternElement[] _patternElements;
     private readonly CharacterNormalizer _characterNormalizer;
@@ -875,7 +875,7 @@ internal class WildcardPatternMatcher
         return patternPositionsForCurrentStringPosition.ReachedEndOfPattern;
     }
 
-    private class PatternPositionsVisitor
+    private sealed class PatternPositionsVisitor
     {
         private readonly int _lengthOfPattern;
 
@@ -1003,7 +1003,7 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private class LiteralCharacterElement(char literalCharacter) : QuestionMarkElement
+    private sealed class LiteralCharacterElement(char literalCharacter) : QuestionMarkElement
     {
         private readonly char _literalCharacter = literalCharacter;
 
@@ -1024,7 +1024,7 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private class BracketExpressionElement(Regex regex) : QuestionMarkElement
+    private sealed class BracketExpressionElement(Regex regex) : QuestionMarkElement
     {
         private readonly Regex _Regex = regex ?? throw new ArgumentNullException(nameof(regex));
 
@@ -1043,7 +1043,7 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private class AsterixElement : PatternElement
+    private sealed class AsterixElement : PatternElement
     {
         public override void ProcessStringCharacter(
                         char currentStringCharacter,
@@ -1067,7 +1067,7 @@ internal class WildcardPatternMatcher
         }
     }
 
-    private class MyWildcardPatternParser : WildcardPatternParser
+    private sealed class MyWildcardPatternParser : WildcardPatternParser
     {
         private readonly List<PatternElement> _patternElements = [];
         private CharacterNormalizer _characterNormalizer;
@@ -1170,7 +1170,7 @@ internal class WildcardPatternMatcher
 /// <summary>
 /// Translates a <see cref="WildcardPattern"/> into a DOS wildcard
 /// </summary>
-internal class WildcardPatternToDosWildcardParser : WildcardPatternParser
+internal sealed class WildcardPatternToDosWildcardParser : WildcardPatternParser
 {
     private readonly StringBuilder _result = new();
 
