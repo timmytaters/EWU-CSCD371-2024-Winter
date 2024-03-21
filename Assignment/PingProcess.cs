@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Assignment;
 
-public record struct PingResult(int ExitCode, string? StdOutput);
+public record struct PingResult(int ExitCode, string? StdOutput, string? StdError);
 
 public class PingProcess
 {
@@ -114,7 +114,7 @@ public class PingProcess
         });
 
         await Task.WhenAll(tasks);
-        return new PingResult(code, sB.ToString());
+        return new PingResult(code, sB.ToString(), null);
 }
     //Bullet 5
     /*
