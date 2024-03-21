@@ -39,13 +39,13 @@ public class PingProcessTests
     public void Run_InvalidAddressOutput_Success()
     {
         (int exitCode, string? stdOutput, string? stdError) = Sut.Run("badaddress");
-        Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
-        stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
+        Assert.IsFalse(string.IsNullOrWhiteSpace(stdError));
+        stdOutput = WildcardPattern.NormalizeLineEndings(stdError!.Trim());
         Assert.AreEqual<string?>(
             "ping: badaddress: Temporary failure in name resolution".Trim(),
             stdOutput,
             $"Output is unexpected: {stdOutput}");
-        Assert.AreEqual<int>(1, exitCode);
+        Assert.AreEqual<int>(2, exitCode);
     }
 
     [TestMethod]
