@@ -22,7 +22,7 @@ public class PingProcessTests
     [TestMethod]
     public void Start_PingProcess_Success()
     {
-        Process process = Process.Start("ping", "localhost");
+        Process process = Process.Start("ping", "-c 4 localhost");
         process.WaitForExit();
         Assert.AreEqual<int>(0, process.ExitCode);
     }
@@ -30,7 +30,7 @@ public class PingProcessTests
     [TestMethod]
     public void Run_GoogleDotCom_Success()
     {
-        int exitCode = Sut.Run("google.com").ExitCode;
+        int exitCode = Sut.Run("-c 4 google.com").ExitCode;
         Assert.AreEqual<int>(0, exitCode);
     }
 
@@ -51,7 +51,7 @@ public class PingProcessTests
     [TestMethod]
     public void Run_CaptureStdOutput_Success()
     {
-        PingResult result = Sut.Run("localhost");
+        PingResult result = Sut.Run("-c 4 localhost");
         AssertValidPingOutput(result);
     }
 
@@ -62,7 +62,7 @@ public class PingProcessTests
         var pingProcess = new PingProcess();
 
         // Act
-        var resultTask = pingProcess.RunTaskAsync("localhost");
+        var resultTask = pingProcess.RunTaskAsync("-c 4 localhost");
         resultTask.Wait(); // Wait for the task to complete synchronously
 
         // Get the result after the task has completed
@@ -78,18 +78,16 @@ public class PingProcessTests
     public void RunAsync_UsingTaskReturn_Success()
     {
         // Do NOT use async/await in this test.
-        Task<PingResult> actual = Sut.RunAsync("localhost");
+        Task<PingResult> actual = Sut.RunAsync("-c 4 localhost");
         AssertValidPingOutput(actual.Result);
     }
 
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
     async public Task RunAsync_UsingTpl_Success()
     {
-        PingResult actual = await Sut.RunAsync("localhost");
+        PingResult actual = await Sut.RunAsync("-c 4 localhost");
         AssertValidPingOutput(actual);
     }
-#pragma warning restore CS1998 // Remove this
 
 
     [TestMethod]
@@ -98,7 +96,7 @@ public class PingProcessTests
     {
         var cTS = new CancellationTokenSource();
         cTS.Cancel();
-        Sut.RunAsync("localhost", cTS.Token).Wait();
+        Sut.RunAsync("-c 4 localhost", cTS.Token).Wait();
     }
 
     [TestMethod]
@@ -109,7 +107,7 @@ public class PingProcessTests
         cTS.Cancel();
         try
         {
-            Sut.RunAsync("localhost", cTS.Token).Wait();
+            Sut.RunAsync("-c 4 localhost", cTS.Token).Wait();
         }
         catch (AggregateException Ae)
         {
@@ -121,7 +119,7 @@ public class PingProcessTests
     [TestMethod]
     async public Task RunAsync_MultipleHostAddresses_True()
     {
-        string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
+        string[] hostNames = new string[] { "-c 4 localhost", "-c 4 localhost", "-c 4 localhost", "-c 4 localhost" };
         int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
         PingResult result = await Sut.RunAsync(hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
@@ -130,14 +128,12 @@ public class PingProcessTests
     }
 
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
-        var startInfo = new ProcessStartInfo("ping", "localhost");
+        var startInfo = new ProcessStartInfo("ping", "-c 4 localhost");
         int exitCode = await Sut.RunLongRunningAsync(startInfo, null, null, default);
         Assert.AreEqual(0, exitCode);
     }
-#pragma warning restore CS1998 // Remove this
 
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()
