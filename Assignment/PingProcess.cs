@@ -19,11 +19,14 @@ public class PingProcess
     public PingResult Run(string hostNameOrAddress)
     {
         StartInfo.Arguments = hostNameOrAddress;
-        StringBuilder? stringBuilder = null;
+        StringBuilder? stdOutStringBuilder = null;
+        StringBuilder? stdErrorStringBuilder = null;
         void updateStdOutput(string? line) =>
-            (stringBuilder??=new StringBuilder()).AppendLine(line);
-        Process process = RunProcessInternal(StartInfo, updateStdOutput, default, default);
-        return new PingResult( process.ExitCode, stringBuilder?.ToString());
+            (stdOutStringBuilder ??= new StringBuilder()).AppendLine(line);
+        void updateStdError(string? line) =>
+            (stdErrorStringBuilder ??= new StringBuilder()).AppendLine(line);
+        Process process = RunProcessInternal(StartInfo, updateStdOutput, updateStdError, default);
+        return new PingResult(process.ExitCode, stdOutStringBuilder?.ToString(), stdErrorStringBuilder?.ToString());
     }
     //Bullet 1
     /*Implement PingProcess' public Task<PingResult> RunTaskAsync(string hostNameOrAddress) ❌✔
