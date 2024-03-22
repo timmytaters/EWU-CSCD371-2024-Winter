@@ -157,6 +157,7 @@ PING * 56 data bytes
 64 bytes from * (::1): icmp_seq=* ttl=* time=* ms
 64 bytes from * (::1): icmp_seq=* ttl=* time=* ms
 64 bytes from * (::1): icmp_seq=* ttl=* time=* ms
+
 --- * ping statistics ---
 * packets transmitted, * received, *% packet loss, time *ms
 rtt min/avg/max/mdev = */*/*/* ms
